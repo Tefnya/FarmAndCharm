@@ -14,6 +14,7 @@ public class FarmAndCharm {
         MobEffectRegistry.init();
         TabRegistry.init();
         ScreenhandlerTypeRegistry.init();
+        SoundEventRegistry.init();
         RecipeTypeRegistry.init();
     }
 }

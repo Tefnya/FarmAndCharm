@@ -197,5 +197,6 @@
   "tooltip.farm_and_charm.thankyou_1": "A reward for crafting all Food Variants",
   "tooltip.farm_and_charm.thankyou_2": "When placed:",
   "tooltip.farm_and_charm.thankyou_3": "Thank you for playing Farm&Charm!",
-  "tooltip.farm_and_charm.thankyou_4": "Increases the growth rate of surrounding seeds"
+  "tooltip.farm_and_charm.thankyou_4": "Increases the growth rate of surrounding seeds",
+  "sound.farm_and_charm.cooking_pot_boiling": "Boiling Pot"
 }

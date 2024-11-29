@@ -1,0 +1,8 @@
+{
+  "cooking_pot_boiling": {
+    "subtitle": "sound.farm_and_charm.cooking_pot_boiling",
+    "sounds": [
+      "farm_and_charm:cooking_pot_boiling"
+    ]
+  }
+}
