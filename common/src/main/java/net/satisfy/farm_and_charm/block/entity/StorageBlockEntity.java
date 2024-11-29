@@ -24,11 +24,11 @@ public class StorageBlockEntity extends BlockEntity {
     private NonNullList<ItemStack> inventory;
 
     public StorageBlockEntity(BlockPos pos, BlockState state) {
-        super((BlockEntityType) EntityTypeRegistry.STORAGE_ENTITY.get(), pos, state);
+        super(EntityTypeRegistry.STORAGE_ENTITY.get(), pos, state);
     }
 
     public StorageBlockEntity(BlockPos pos, BlockState state, int size) {
-        super((BlockEntityType)EntityTypeRegistry.STORAGE_ENTITY.get(), pos, state);
+        super(EntityTypeRegistry.STORAGE_ENTITY.get(), pos, state);
         this.size = size;
         this.inventory = NonNullList.withSize(this.size, ItemStack.EMPTY);
     }

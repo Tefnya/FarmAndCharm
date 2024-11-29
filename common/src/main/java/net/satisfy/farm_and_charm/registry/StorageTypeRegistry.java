@@ -10,8 +10,9 @@ public class StorageTypeRegistry {
     public static final ResourceLocation TOOL_RACK = new FarmAndCharmIdentifier("tool_rack");
     public static final ResourceLocation WINDOW_SILL = new FarmAndCharmIdentifier("window_sill");
 
-    public static void registerBlocks(Set<Block> blocks) {
+    public static Set<Block> registerBlocks(Set<Block> blocks) {
         blocks.add(ObjectRegistry.TOOL_RACK.get());
         blocks.add(ObjectRegistry.WINDOW_SILL.get());
+        return blocks;
     }
 }
