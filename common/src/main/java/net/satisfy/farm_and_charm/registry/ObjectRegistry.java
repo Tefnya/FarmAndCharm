@@ -1,8 +1,5 @@
 package net.satisfy.farm_and_charm.registry;
 
-import de.cristelknight.doapi.Util;
-import de.cristelknight.doapi.common.block.FacingBlock;
-import de.cristelknight.doapi.common.block.StackableEatableBlock;
 import dev.architectury.registry.registries.DeferredRegister;
 import dev.architectury.registry.registries.Registrar;
 import dev.architectury.registry.registries.RegistrySupplier;
@@ -28,6 +25,7 @@ import net.satisfy.farm_and_charm.item.food.EffectBlockItem;
 import net.satisfy.farm_and_charm.item.food.EffectItem;
 import net.satisfy.farm_and_charm.item.food.EffectJugItem;
 import net.satisfy.farm_and_charm.util.FarmAndCharmIdentifier;
+import net.satisfy.farm_and_charm.util.Util;
 
 import java.util.function.Consumer;
 import java.util.function.Supplier;
