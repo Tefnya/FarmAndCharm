@@ -1,7 +1,5 @@
 package net.satisfy.farm_and_charm.block;
 
-import de.cristelknight.doapi.common.registry.DoApiSoundEventRegistry;
-import de.cristelknight.doapi.common.util.GeneralUtil;
 import net.minecraft.ChatFormatting;
 import net.minecraft.Util;
 import net.minecraft.core.BlockPos;
@@ -44,6 +42,8 @@ import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import net.satisfy.farm_and_charm.block.entity.MincerBlockEntity;
 import net.satisfy.farm_and_charm.registry.EntityTypeRegistry;
+import net.satisfy.farm_and_charm.registry.SoundEventRegistry;
+import net.satisfy.farm_and_charm.util.GeneralUtil;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -179,7 +179,7 @@ public class MincerBlock extends BaseEntityBlock {
                 if (crank <= 6) {
 
                     level.setBlock(pos, state.setValue(CRANK, 10), Block.UPDATE_ALL);
-                    level.playSound(null, pos, DoApiSoundEventRegistry.MINCER_CRANKING.get(), SoundSource.BLOCKS, 1.0F, 2.5F);
+                    level.playSound(null, pos, SoundEventRegistry.MINCER_CRANKING.get(), SoundSource.BLOCKS, 1.0F, 2.5F);
                     return InteractionResult.SUCCESS;
                 }
             }
@@ -200,7 +200,7 @@ public class MincerBlock extends BaseEntityBlock {
             if (crank <= 6) {
 
                 level.setBlock(pos, state.setValue(CRANK, 10), Block.UPDATE_ALL);
-                level.playSound(null, pos, DoApiSoundEventRegistry.MINCER_CRANKING.get(), SoundSource.BLOCKS, 0.05f, 2.5F);
+                level.playSound(null, pos, SoundEventRegistry.MINCER_CRANKING.get(), SoundSource.BLOCKS, 0.05f, 2.5F);
                 return InteractionResult.SUCCESS;
             }
 

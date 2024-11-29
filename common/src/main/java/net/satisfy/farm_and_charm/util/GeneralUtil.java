@@ -3,12 +3,19 @@ package net.satisfy.farm_and_charm.util;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.util.StringRepresentable;
+import net.minecraft.world.level.LevelReader;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.state.properties.EnumProperty;
 import net.minecraft.world.phys.shapes.BooleanOp;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 public class GeneralUtil {
+
+    public static final EnumProperty<GeneralUtil.LineConnectingType> LINE_CONNECTING_TYPE = EnumProperty.create("type", GeneralUtil.LineConnectingType.class);
 
     public static void putBlockPos(CompoundTag compoundTag, BlockPos blockPos) {
         if (blockPos != null) {
@@ -39,5 +46,35 @@ public class GeneralUtil {
         }
 
         return buffer[0];
+    }
+
+    public static boolean isFaceFull(LevelReader levelReader, BlockPos blockPos) {
+        BlockPos belowPos = blockPos.below();
+        return Block.isFaceFull(levelReader.getBlockState(belowPos).getShape(levelReader, belowPos), Direction.UP);
+    }
+
+    public static boolean isSolid(LevelReader levelReader, BlockPos blockPos) {
+        return levelReader.getBlockState(blockPos.below()).isSolid();
+    }
+
+    public static boolean isFullAndSolid(LevelReader levelReader, BlockPos blockPos) {
+        return isFaceFull(levelReader, blockPos) && isSolid(levelReader, blockPos);
+    }
+
+    public static enum LineConnectingType implements StringRepresentable {
+        NONE("none"),
+        MIDDLE("middle"),
+        LEFT("left"),
+        RIGHT("right");
+
+        private final String name;
+
+        private LineConnectingType(String type) {
+            this.name = type;
+        }
+
+        public @NotNull String getSerializedName() {
+            return this.name;
+        }
     }
 }
