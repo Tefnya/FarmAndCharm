@@ -2,7 +2,6 @@ package net.satisfy.farm_and_charm.client.render;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
-import de.cristelknight.doapi.client.ClientUtil;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.renderer.MultiBufferSource;
@@ -10,6 +9,7 @@ import net.minecraft.core.NonNullList;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.ItemStack;
 import net.satisfy.farm_and_charm.block.entity.StorageBlockEntity;
+import net.satisfy.farm_and_charm.client.util.ClientUtil;
 
 @Environment(EnvType.CLIENT)
 public class WindowSillRenderer implements StorageTypeRenderer {
