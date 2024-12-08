@@ -2,7 +2,6 @@ package net.satisfy.farm_and_charm.client.gui;
 
 
 import com.mojang.blaze3d.systems.RenderSystem;
-import de.cristelknight.doapi.client.recipebook.screen.AbstractRecipeBookGUIScreen;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.gui.GuiGraphics;
