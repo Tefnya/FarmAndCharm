@@ -1,7 +1,6 @@
 package net.satisfy.farm_and_charm.core.block.crops;
 
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.Level;
@@ -22,13 +21,17 @@ public class TomatoCropHeadBlock extends TomatoCropBlock implements Bonemealable
     }
 
     public static boolean canGrowInto(ServerLevel serverLevel, BlockPos blockPos) {
-        return serverLevel.getBlockState(blockPos).isAir() && (isRopeAbove(serverLevel, blockPos) || getHeight(blockPos.below(), serverLevel) < 2);
+        return serverLevel.getBlockState(blockPos).isAir() && (isRopeAbove(serverLevel, blockPos) || getHeight(blockPos.below(), serverLevel) < getMaxHeight(serverLevel, blockPos));
+    }
+
+    public static int getMaxHeight(LevelAccessor levelAccessor, BlockPos blockPos) {
+        return isRopeAbove(levelAccessor, blockPos) ? 4 : 2;
     }
 
     @Override
     public void tick(BlockState blockState, ServerLevel serverLevel, BlockPos blockPos, RandomSource randomSource) {
         super.tick(blockState, serverLevel, blockPos, randomSource);
-        if (getHeight(blockPos, serverLevel) > 2 && !isRopeAbove(serverLevel, blockPos)) {
+        if (getHeight(blockPos, serverLevel) > getMaxHeight(serverLevel, blockPos) && !isRopeAbove(serverLevel, blockPos)) {
             serverLevel.destroyBlock(blockPos, true);
         }
     }
@@ -60,11 +63,11 @@ public class TomatoCropHeadBlock extends TomatoCropBlock implements Bonemealable
 
     @Override
     @SuppressWarnings("deprecation")
-    public @NotNull BlockState updateShape(BlockState blockState, Direction direction, BlockState blockState2, LevelAccessor levelAccessor, BlockPos blockPos, BlockPos blockPos2) {
-        if ((direction == Direction.DOWN && !blockState.canSurvive(levelAccessor, blockPos)) || (getHeight(blockPos, levelAccessor) > 2 && !isRopeAbove(levelAccessor, blockPos))) {
+    public @NotNull BlockState updateShape(BlockState blockState, net.minecraft.core.Direction direction, BlockState blockState2, net.minecraft.world.level.LevelAccessor levelAccessor, BlockPos blockPos, BlockPos blockPos2) {
+        if ((direction == net.minecraft.core.Direction.DOWN && !blockState.canSurvive(levelAccessor, blockPos)) || (getHeight(blockPos, levelAccessor) > getMaxHeight(levelAccessor, blockPos) && !isRopeAbove(levelAccessor, blockPos))) {
             levelAccessor.scheduleTick(blockPos, this, 1);
         }
-        if (direction != Direction.UP || !blockState2.is(this) && !blockState2.is(getBodyBlock())) {
+        if (direction != net.minecraft.core.Direction.UP || !blockState2.is(this) && !blockState2.is(getBodyBlock())) {
             return blockState;
         } else {
             return getBodyBlock().getStateForAge(blockState.getValue(AGE));

@@ -21,6 +21,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.Optional;
 
+@SuppressWarnings("deprecation")
 public class TomatoCropBodyBlock extends TomatoCropBlock implements BonemealableBlock {
     public static final VoxelShape SHAPE = Block.box(1.0, 0.0, 1.0, 15.0, 16.0, 15.0);
 
@@ -37,21 +38,20 @@ public class TomatoCropBodyBlock extends TomatoCropBlock implements Bonemealable
         return new ItemStack(getHeadBlock());
     }
 
-    @SuppressWarnings("deprecation")
     @Override
     public boolean canBeReplaced(BlockState blockState, BlockPlaceContext blockPlaceContext) {
         boolean bl = super.canBeReplaced(blockState, blockPlaceContext);
         return (!bl || !blockPlaceContext.getItemInHand().is(getHeadBlock().asItem())) && bl;
     }
 
-    @SuppressWarnings("deprecation")
+    @Override
     public @NotNull BlockState updateShape(BlockState blockState, Direction direction, BlockState blockState2, LevelAccessor levelAccessor, BlockPos blockPos, BlockPos blockPos2) {
         if (direction == Direction.DOWN && !blockState.canSurvive(levelAccessor, blockPos)) {
             levelAccessor.scheduleTick(blockPos, this, 1);
         }
         TomatoCropHeadBlock hopsCropHeadBlock = getHeadBlock();
         if (direction == Direction.UP && !blockState2.is(this) && !blockState2.is(hopsCropHeadBlock)) {
-            if (getHeight(blockPos, levelAccessor) > 2 && !isRopeAbove(levelAccessor, blockPos)) {
+            if (getHeight(blockPos, levelAccessor) > TomatoCropHeadBlock.getMaxHeight(levelAccessor, blockPos) - 1 && !isRopeAbove(levelAccessor, blockPos)) {
                 levelAccessor.scheduleTick(blockPos, hopsCropHeadBlock, 1);
             }
             return hopsCropHeadBlock.getStateForAge(blockState.getValue(AGE));
@@ -69,7 +69,6 @@ public class TomatoCropBodyBlock extends TomatoCropBlock implements Bonemealable
     public boolean isBonemealSuccess(Level level, RandomSource randomSource, BlockPos blockPos, BlockState blockState) {
         return true;
     }
-
 
     @Override
     public void performBonemeal(ServerLevel serverLevel, RandomSource randomSource, BlockPos blockPos, BlockState blockState) {

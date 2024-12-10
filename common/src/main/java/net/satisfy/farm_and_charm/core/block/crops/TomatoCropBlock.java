@@ -3,8 +3,6 @@ package net.satisfy.farm_and_charm.core.block.crops;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
-import net.minecraft.sounds.SoundEvents;
-import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
@@ -26,9 +24,8 @@ import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import net.satisfy.farm_and_charm.core.registry.ObjectRegistry;
-import org.jetbrains.annotations.NotNull;
 
-import static net.satisfy.farm_and_charm.core.registry.ObjectRegistry.FERTILIZED_FARM_BLOCK;
+import org.jetbrains.annotations.NotNull;
 
 @SuppressWarnings("deprecation")
 public abstract class TomatoCropBlock extends Block {
@@ -90,7 +87,7 @@ public abstract class TomatoCropBlock extends Block {
     }
 
     protected boolean mayPlaceOn(BlockState blockState) {
-        return blockState.is(Blocks.FARMLAND) || blockState.is(FERTILIZED_FARM_BLOCK.get());
+        return blockState.is(Blocks.FARMLAND) || blockState.is(ObjectRegistry.FERTILIZED_FARM_BLOCK.get());
     }
 
     protected boolean canGrow(BlockState blockState) {
@@ -119,7 +116,7 @@ public abstract class TomatoCropBlock extends Block {
             drop = new ItemStack(ObjectRegistry.ROTTEN_TOMATO.get(), 1);
         }
         popResource(level, blockPos, drop);
-        level.playSound(null, blockPos, SoundEvents.SWEET_BERRY_BUSH_PICK_BERRIES, SoundSource.BLOCKS, 1.0F, 0.8F + level.random.nextFloat() * 0.4F);
+        level.playSound(null, blockPos, net.minecraft.sounds.SoundEvents.SWEET_BERRY_BUSH_PICK_BERRIES, net.minecraft.sounds.SoundSource.BLOCKS, 1.0F, 0.8F + level.random.nextFloat() * 0.4F);
         level.setBlock(blockPos, blockState.setValue(AGE, 1), 2);
     }
 
