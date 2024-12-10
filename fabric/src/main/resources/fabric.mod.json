@@ -5,7 +5,7 @@
   "name": "[Let's Do] Farm & Charm",
   "description": "The farm calls: Experience the art of advanced agriculture and farmhouse cuisine! Use mincers, cooking pots, as well as new grains and fruit varieties to enhance your culinary and agricultural skills.",
   "authors": [
-    "satisfy"
+    "satisfy, jason13official"
   ],
   "contact": {
     "homepage": "https://legacy.curseforge.com/minecraft/mc-mods/FarmAndCharm",
@@ -21,14 +21,11 @@
     "client": [
       "net.satisfy.farm_and_charm.fabric.client.FarmAndCharmClientFabric"
     ],
-    "doapi": [
-      "net.satisfy.farm_and_charm.util.api.FarmAndCharmDoAPI"
-    ],
     "rei_client": [
       "net.satisfy.farm_and_charm.fabric.rei.FarmAndCharmReiClientPluginFabric"
     ],
     "jei_mod_plugin": [
-      "net.satisfy.farm_and_charm.compat.jei.Farm_And_Charm_JEIPlugin"
+      "net.satisfy.farm_and_charm.core.compat.jei.Farm_And_Charm_JEIPlugin"
     ]
   },
   "mixins": [
@@ -38,8 +35,7 @@
   "depends": {
     "fabric-api": "*",
     "minecraft": ">=1.20",
-    "architectury": ">=9.0.8",
-    "doapi": ">=1.2.11"
+    "architectury": ">=9.0.8"
   },
   "conflicts": {
     "bakery": "<2.0.0",

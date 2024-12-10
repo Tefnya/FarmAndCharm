@@ -6,7 +6,7 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.satisfy.farm_and_charm.FarmAndCharm;
-import net.satisfy.farm_and_charm.registry.CompostableRegistry;
+import net.satisfy.farm_and_charm.core.registry.CompostableRegistry;
 
 @Mod(FarmAndCharm.MOD_ID)
 public class FarmAndCharmForge {

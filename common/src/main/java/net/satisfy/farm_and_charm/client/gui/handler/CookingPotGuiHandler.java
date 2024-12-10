@@ -3,21 +3,18 @@ package net.satisfy.farm_and_charm.client.gui.handler;
 import net.minecraft.world.Container;
 import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.entity.player.Inventory;
-import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.ContainerData;
 import net.minecraft.world.inventory.SimpleContainerData;
 import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.Recipe;
-import net.satisfy.farm_and_charm.block.entity.CookingPotBlockEntity;
+import net.satisfy.farm_and_charm.core.block.entity.CookingPotBlockEntity;
 import net.satisfy.farm_and_charm.client.gui.handler.slot.ExtendedSlot;
 //import net.satisfy.farm_and_charm.client.recipebook.group.CookingPotRecipeBookGroup;
-import net.satisfy.farm_and_charm.recipe.CookingPotRecipe;
-import net.satisfy.farm_and_charm.registry.ScreenhandlerTypeRegistry;
-import net.satisfy.farm_and_charm.registry.TagRegistry;
-
-import java.util.List;
+import net.satisfy.farm_and_charm.core.recipe.CookingPotRecipe;
+import net.satisfy.farm_and_charm.core.registry.ScreenhandlerTypeRegistry;
+import net.satisfy.farm_and_charm.core.registry.TagRegistry;
 
 public class CookingPotGuiHandler extends AbstractRecipeBookGUIScreenHandler {
     private final ContainerData propertyDelegate;

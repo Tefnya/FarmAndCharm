@@ -1,6 +1,6 @@
 package net.satisfy.farm_and_charm;
 
-import net.satisfy.farm_and_charm.registry.*;
+import net.satisfy.farm_and_charm.core.registry.*;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
