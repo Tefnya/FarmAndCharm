@@ -5,6 +5,7 @@ import net.minecraft.world.effect.MobEffectCategory;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
+import net.satisfy.farm_and_charm.platform.PlatformHelper;
 
 public class SatiationEffect extends MobEffect {
     public SatiationEffect() {
@@ -14,15 +15,17 @@ public class SatiationEffect extends MobEffect {
     @Override
     public void applyEffectTick(LivingEntity entity, int amplifier) {
         if (entity instanceof Player player) {
+            int healAmount = PlatformHelper.getSatiationEffectHealAmount();
             if (player.getFoodData().needsFood() || player.hasEffect(MobEffects.REGENERATION) || player.getFoodData().getSaturationLevel() <= 0f) {
                 return;
             }
-            player.heal(1.0F + amplifier);
+            player.heal(healAmount + amplifier);
         }
     }
 
     @Override
     public boolean isDurationEffectTick(int duration, int amplifier) {
-        return duration % 40 == 0;
+        int interval = PlatformHelper.getSatiationEffectInterval();
+        return duration % interval == 0;
     }
 }

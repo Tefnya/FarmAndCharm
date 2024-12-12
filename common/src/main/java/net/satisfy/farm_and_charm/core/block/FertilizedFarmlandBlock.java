@@ -5,13 +5,17 @@ import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.context.BlockPlaceContext;
+import net.minecraft.world.level.GameRules;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.BonemealableBlock;
 import net.minecraft.world.level.block.FarmBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.gameevent.GameEvent;
 import net.satisfy.farm_and_charm.core.registry.ObjectRegistry;
+import net.satisfy.farm_and_charm.platform.PlatformHelper;
 import org.jetbrains.annotations.Nullable;
 
 public class FertilizedFarmlandBlock extends FarmBlock {
@@ -47,6 +51,9 @@ public class FertilizedFarmlandBlock extends FarmBlock {
     }
 
     private void applyBonemealEffect(ServerLevel serverLevel, BlockPos blockPos, RandomSource randomSource) {
+        if (PlatformHelper.isBonemealEffectEnabled()) {
+            return;
+        }
         BlockPos posAbove = blockPos.above();
         BlockState stateAbove = serverLevel.getBlockState(posAbove);
         if (stateAbove.getBlock() instanceof BonemealableBlock bonemealableBlock && bonemealableBlock.isValidBonemealTarget(serverLevel, posAbove, stateAbove, false)) {
@@ -65,5 +72,4 @@ public class FertilizedFarmlandBlock extends FarmBlock {
     @Override
     public void fallOn(Level level, BlockState blockState, BlockPos blockPos, Entity entity, float f) {
     }
-
 }
