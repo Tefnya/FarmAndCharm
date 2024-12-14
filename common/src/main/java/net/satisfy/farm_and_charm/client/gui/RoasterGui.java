@@ -30,16 +30,20 @@ public class RoasterGui extends AbstractContainerScreen<RoasterGuiHandler> {
     @Override
     protected void init() {
         super.init();
-        this.titleLabelX += 20;
     }
 
-//    @Override
+    @Override
+    public void render(GuiGraphics guiGraphics, int mouseX, int mouseY, float delta) {
+        this.renderBackground(guiGraphics);
+        super.render(guiGraphics, mouseX, mouseY, delta);
+        this.renderTooltip(guiGraphics, mouseX, mouseY);
+    }
+
     public void renderProgressArrow(GuiGraphics guiGraphics) {
         int progress = this.menu.getScaledProgress(23);
         guiGraphics.blit(BACKGROUND, this.leftPos + 95, this.topPos + 14, 178, 15, progress, 30);
     }
 
-//    @Override
     public void renderBurnIcon(GuiGraphics guiGraphics, int posX, int posY) {
         if (this.menu.isBeingBurned()) {
             guiGraphics.blit(BACKGROUND, posX + 124, posY + 56, 176, 0, 17, 15);

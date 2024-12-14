@@ -12,7 +12,10 @@
     }
   ],
   "container": {
-    "item": "minecraft:glass_bottle"
+    "required": true,
+    "item": {
+      "item": "minecraft:glass_bottle"
+    }
   },
   "result": {
     "item": "farm_and_charm:ribwort_tea",

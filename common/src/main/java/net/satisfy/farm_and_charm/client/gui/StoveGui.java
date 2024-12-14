@@ -25,18 +25,21 @@ public class StoveGui extends AbstractContainerScreen<StoveGuiHandler> {
 
     @Override
     protected void init() {
-        this.titleLabelX += 2;
-        this.titleLabelY += -3;
         super.init();
     }
 
-//    @Override
+    @Override
+    public void render(GuiGraphics guiGraphics, int mouseX, int mouseY, float delta) {
+        this.renderBackground(guiGraphics);
+        super.render(guiGraphics, mouseX, mouseY, delta);
+        this.renderTooltip(guiGraphics, mouseX, mouseY);
+    }
+
     public void renderProgressArrow(GuiGraphics guiGraphics) {
         int progress = this.menu.getScaledProgress(18);
         guiGraphics.blit(BACKGROUND, leftPos + 93, topPos + 32, 178, 20, progress, 25);
     }
 
-//    @Override
     public void renderBurnIcon(GuiGraphics guiGraphics, int posX, int posY) {
         if (this.menu.isBeingBurned()) {
             guiGraphics.blit(BACKGROUND, posX + 62, posY + 49, 176, 0, 17, 15);

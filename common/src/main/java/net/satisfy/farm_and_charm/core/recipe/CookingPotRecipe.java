@@ -19,13 +19,15 @@ public class CookingPotRecipe implements Recipe<Container> {
 
     final ResourceLocation id;
     private final NonNullList<Ingredient> inputs;
-    private final ItemStack container;
+    private final boolean containerRequired;
+    private final ItemStack containerItem;
     private final ItemStack output;
 
-    public CookingPotRecipe(ResourceLocation id, NonNullList<Ingredient> inputs, ItemStack container, ItemStack output) {
+    public CookingPotRecipe(ResourceLocation id, NonNullList<Ingredient> inputs, boolean containerRequired, ItemStack containerItem, ItemStack output) {
         this.id = id;
         this.inputs = inputs;
-        this.container = container;
+        this.containerRequired = containerRequired;
+        this.containerItem = containerItem;
         this.output = output;
     }
 
@@ -69,8 +71,12 @@ public class CookingPotRecipe implements Recipe<Container> {
         return this.inputs;
     }
 
-    public ItemStack getContainer() {
-        return container;
+    public boolean isContainerRequired() {
+        return containerRequired;
+    }
+
+    public ItemStack getContainerItem() {
+        return containerItem;
     }
 
     @Override
@@ -87,23 +93,35 @@ public class CookingPotRecipe implements Recipe<Container> {
                 throw new JsonParseException("No ingredients for CookingPot Recipe");
             } else if (ingredients.size() > 6) {
                 throw new JsonParseException("Too many ingredients for CookingPot Recipe");
-            } else {
-                return new CookingPotRecipe(id, ingredients, ShapedRecipe.itemStackFromJson(GsonHelper.getAsJsonObject(json, "container")), ShapedRecipe.itemStackFromJson(GsonHelper.getAsJsonObject(json, "result")));
             }
+            JsonObject containerObj = GsonHelper.getAsJsonObject(json, "container");
+            boolean required = GsonHelper.getAsBoolean(containerObj, "required", false);
+            ItemStack containerStack = ItemStack.EMPTY;
+            if (required) {
+                containerStack = ShapedRecipe.itemStackFromJson(GsonHelper.getAsJsonObject(containerObj, "item"));
+            }
+            ItemStack result = ShapedRecipe.itemStackFromJson(GsonHelper.getAsJsonObject(json, "result"));
+            return new CookingPotRecipe(id, ingredients, required, containerStack, result);
         }
 
         @Override
         public @NotNull CookingPotRecipe fromNetwork(ResourceLocation id, FriendlyByteBuf buf) {
             final var ingredients = NonNullList.withSize(buf.readVarInt(), Ingredient.EMPTY);
             ingredients.replaceAll(ignored -> Ingredient.fromNetwork(buf));
-            return new CookingPotRecipe(id, ingredients, buf.readItem(), buf.readItem());
+            boolean required = buf.readBoolean();
+            ItemStack containerStack = required ? buf.readItem() : ItemStack.EMPTY;
+            ItemStack output = buf.readItem();
+            return new CookingPotRecipe(id, ingredients, required, containerStack, output);
         }
 
         @Override
         public void toNetwork(FriendlyByteBuf buf, CookingPotRecipe recipe) {
             buf.writeVarInt(recipe.inputs.size());
             recipe.inputs.forEach(entry -> entry.toNetwork(buf));
-            buf.writeItem(recipe.getContainer());
+            buf.writeBoolean(recipe.containerRequired);
+            if (recipe.containerRequired) {
+                buf.writeItem(recipe.containerItem);
+            }
             buf.writeItem(recipe.output);
         }
     }

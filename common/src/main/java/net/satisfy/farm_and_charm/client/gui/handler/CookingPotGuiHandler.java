@@ -11,7 +11,6 @@ import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.Recipe;
 import net.satisfy.farm_and_charm.core.block.entity.CookingPotBlockEntity;
 import net.satisfy.farm_and_charm.client.gui.handler.slot.ExtendedSlot;
-//import net.satisfy.farm_and_charm.client.recipebook.group.CookingPotRecipeBookGroup;
 import net.satisfy.farm_and_charm.core.recipe.CookingPotRecipe;
 import net.satisfy.farm_and_charm.core.registry.ScreenhandlerTypeRegistry;
 import net.satisfy.farm_and_charm.core.registry.TagRegistry;
@@ -38,7 +37,7 @@ public class CookingPotGuiHandler extends AbstractRecipeBookGUIScreenHandler {
 
         for (int row = 0; row < 2; row++) {
             for (int slot = 0; slot < 3; slot++) {
-                this.addSlot(new Slot(inventory, slot + row + (row * 2), 30 + (slot * 18), 17 + (row * 18)));
+                this.addSlot(new Slot(inventory, slot + row * 3, 30 + (slot * 18), 17 + (row * 18)));
             }
         }
 
@@ -51,14 +50,14 @@ public class CookingPotGuiHandler extends AbstractRecipeBookGUIScreenHandler {
     }
 
     private void buildPlayerContainer(Inventory playerInventory) {
-        int i;
-        for (i = 0; i < 3; ++i) {
-            for (int j = 0; j < 9; ++j) {
-                this.addSlot(new Slot(playerInventory, j + i * 9 + 9, 8 + j * 18, 84 + i * 18));
+        for (int row = 0; row < 3; ++row) {
+            for (int col = 0; col < 9; ++col) {
+                this.addSlot(new Slot(playerInventory, col + row * 9 + 9, 8 + col * 18, 84 + row * 18));
             }
         }
-        for (i = 0; i < 9; ++i) {
-            this.addSlot(new Slot(playerInventory, i, 8 + i * 18, 142));
+
+        for (int col = 0; col < 9; ++col) {
+            this.addSlot(new Slot(playerInventory, col, 8 + col * 18, 142));
         }
     }
 
@@ -83,18 +82,27 @@ public class CookingPotGuiHandler extends AbstractRecipeBookGUIScreenHandler {
                 for (Slot slot : this.slots) {
                     if (ingredient.test(slot.getItem())) {
                         found = true;
+                        break;
                     }
                 }
                 if (!found) {
                     return false;
                 }
             }
-            ItemStack container = cookingPotRecipe.getContainer();
-            for (Slot slot : this.slots) {
-                if (container.getItem() == slot.getItem().getItem()) {
-                    return true;
+
+            if (cookingPotRecipe.isContainerRequired()) {
+                ItemStack requiredContainer = cookingPotRecipe.getContainerItem();
+                boolean containerFound = false;
+                for (Slot slot : this.slots) {
+                    if (requiredContainer.getItem() == slot.getItem().getItem()) {
+                        containerFound = true;
+                        break;
+                    }
                 }
+                return containerFound;
             }
+
+            return true;
         }
         return false;
     }

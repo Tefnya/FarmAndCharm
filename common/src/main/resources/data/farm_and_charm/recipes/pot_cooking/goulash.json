@@ -18,7 +18,10 @@
     }
   ],
   "container": {
-    "item": "minecraft:bowl"
+    "required": false,
+    "item": {
+      "item": "minecraft:bowl"
+    }
   },
   "result": {
     "item": "farm_and_charm:goulash",

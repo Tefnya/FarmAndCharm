@@ -15,7 +15,10 @@
     }
   ],
   "container": {
-    "item": "minecraft:bowl"
+    "required": true,
+    "item": {
+      "item": "minecraft:bowl"
+    }
   },
   "result": {
     "item": "farm_and_charm:barley_soup",
