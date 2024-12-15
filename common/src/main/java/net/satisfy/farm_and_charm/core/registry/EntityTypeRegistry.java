@@ -10,6 +10,7 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.satisfy.farm_and_charm.FarmAndCharm;
 import net.satisfy.farm_and_charm.core.block.entity.*;
+import net.satisfy.farm_and_charm.core.entity.ChairEntity;
 import net.satisfy.farm_and_charm.core.entity.PlowCartEntity;
 import net.satisfy.farm_and_charm.core.entity.RottenTomatoEntity;
 import net.satisfy.farm_and_charm.core.entity.SupplyCartEntity;
@@ -37,8 +38,8 @@ public class EntityTypeRegistry {
 
     public static final RegistrySupplier<EntityType<RottenTomatoEntity>> ROTTEN_TOMATO = registerEntityType("rotten_tomato", () -> EntityType.Builder.<RottenTomatoEntity>of(RottenTomatoEntity::new, MobCategory.MISC).sized(0.25f, 0.25f).build(new FarmAndCharmIdentifier("rotten_tomato").toString()));
     public static final RegistrySupplier<EntityType<SupplyCartEntity>> SUPPLY_CART = registerEntityType("cart", () -> EntityType.Builder.of(SupplyCartEntity::new, MobCategory.MISC).sized(1.875f, 0.875f).clientTrackingRange(10).build(new FarmAndCharmIdentifier("supply_cart").toString()));
-
     public static final RegistrySupplier<EntityType<PlowCartEntity>> PLOW = registerEntityType("plow", () -> EntityType.Builder.of(PlowCartEntity::new, MobCategory.MISC).sized(1.875f, 0.875f).clientTrackingRange(10).build(new FarmAndCharmIdentifier("plow").toString()));
+    public static final RegistrySupplier<EntityType<ChairEntity>> CHAIR = registerEntityType("chair", () -> EntityType.Builder.of(ChairEntity::new, MobCategory.MISC).sized(0.001F, 0.001F).build((new FarmAndCharmIdentifier("chair")).toString()));
 
     private static <T extends BlockEntityType<?>> RegistrySupplier<T> registerBlockEntity(final String path, final Supplier<T> type) {
         return BLOCK_ENTITY_TYPES.register(new FarmAndCharmIdentifier(path), type);

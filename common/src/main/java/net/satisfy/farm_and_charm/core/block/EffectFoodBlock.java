@@ -32,9 +32,9 @@ import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import net.satisfy.farm_and_charm.core.block.entity.EffectFoodBlockEntity;
 import net.satisfy.farm_and_charm.core.item.food.EffectFoodHelper;
-import net.satisfy.farm_and_charm.core.util.GeneralUtil;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import net.satisfy.farm_and_charm.core.util.GeneralUtil;
 
 import java.util.HashMap;
 import java.util.Map;
