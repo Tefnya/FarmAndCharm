@@ -161,7 +161,6 @@ public class ObjectRegistry {
     public static final RegistrySupplier<Block> RIBWORT_TEA = registerTea("ribwort_tea", () -> new TeaJugBlock(BlockBehaviour.Properties.copy(Blocks.GLASS)), MobEffects.REGENERATION, 120);
 
     public static void init() {
-        FarmAndCharm.LOGGER.debug("Registering Mod Block and Items for " + FarmAndCharm.MOD_ID);
         ITEMS.register();
         BLOCKS.register();
     }

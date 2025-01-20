@@ -44,16 +44,11 @@ public class EntityTypeRegistry {
         return BLOCK_ENTITY_TYPES.register(new FarmAndCharmIdentifier(path), type);
     }
 
-
     private static <T extends EntityType<?>> RegistrySupplier<T> registerEntityType(final String path, final Supplier<T> type) {
         return ENTITY_TYPES.register(new FarmAndCharmIdentifier(path), type);
     }
 
-
     public static void init() {
         ENTITY_TYPES.register();
-        FarmAndCharm.LOGGER.debug("Registering Mod Entities and Block Entities for " + FarmAndCharm.MOD_ID);
     }
-
-
 }

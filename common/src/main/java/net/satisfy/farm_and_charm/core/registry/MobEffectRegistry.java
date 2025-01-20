@@ -35,7 +35,6 @@ public class MobEffectRegistry {
     }
 
     public static void init() {
-        FarmAndCharm.LOGGER.debug("Registering MobEffects for " + FarmAndCharm.MOD_ID);
         MOB_EFFECTS.register();
     }
 
