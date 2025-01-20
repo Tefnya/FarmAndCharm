@@ -12,7 +12,6 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Recipe;
 import net.satisfy.farm_and_charm.FarmAndCharm;
-import net.satisfy.farm_and_charm.core.compat.rei.Farm_And_CharmREIClientPlugin;
 import net.satisfy.farm_and_charm.core.recipe.CookingPotRecipe;
 
 import java.util.ArrayList;

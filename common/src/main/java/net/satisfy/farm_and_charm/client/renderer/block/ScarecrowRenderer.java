@@ -11,9 +11,9 @@ import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.core.Direction;
 import net.minecraft.resources.ResourceLocation;
 import net.satisfy.farm_and_charm.FarmAndCharm;
+import net.satisfy.farm_and_charm.client.model.ScarecrowModel;
 import net.satisfy.farm_and_charm.core.block.ScarecrowBlock;
 import net.satisfy.farm_and_charm.core.block.entity.ScarecrowBlockEntity;
-import net.satisfy.farm_and_charm.client.model.ScarecrowModel;
 import org.joml.Quaternionf;
 
 import java.util.Objects;

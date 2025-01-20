@@ -23,8 +23,8 @@ import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import net.satisfy.farm_and_charm.core.block.entity.FeedingTroughBlockEntity;
-import org.jetbrains.annotations.NotNull;
 import net.satisfy.farm_and_charm.core.util.GeneralUtil;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.HashMap;
 import java.util.Map;

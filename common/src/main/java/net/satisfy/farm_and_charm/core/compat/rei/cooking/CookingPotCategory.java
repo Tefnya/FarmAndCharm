@@ -1,6 +1,7 @@
 package net.satisfy.farm_and_charm.core.compat.rei.cooking;
 
-import me.shedaniel.math.*;
+import me.shedaniel.math.Point;
+import me.shedaniel.math.Rectangle;
 import me.shedaniel.rei.api.client.gui.Renderer;
 import me.shedaniel.rei.api.client.gui.widgets.Widget;
 import me.shedaniel.rei.api.client.gui.widgets.Widgets;

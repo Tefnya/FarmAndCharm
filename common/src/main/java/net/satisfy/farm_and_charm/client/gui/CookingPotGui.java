@@ -11,7 +11,6 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Inventory;
 import net.satisfy.farm_and_charm.client.gui.handler.CookingPotGuiHandler;
-//import net.satisfy.farm_and_charm.client.recipebook.CookingPotRecipeBook;
 import net.satisfy.farm_and_charm.core.util.FarmAndCharmIdentifier;
 
 @Environment(EnvType.CLIENT)

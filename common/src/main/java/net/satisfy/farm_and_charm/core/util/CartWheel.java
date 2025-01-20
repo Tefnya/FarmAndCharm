@@ -7,7 +7,6 @@ import net.minecraft.util.Mth;
 import net.minecraft.world.level.block.RenderShape;
 import net.minecraft.world.level.block.state.BlockState;
 import net.satisfy.farm_and_charm.core.entity.AbstractTowableEntity;
-import net.satisfy.farm_and_charm.core.registry.SoundEventRegistry;
 
 public final class CartWheel {
     private float rotation;

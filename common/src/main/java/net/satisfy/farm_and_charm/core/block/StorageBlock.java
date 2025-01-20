@@ -1,6 +1,5 @@
 package net.satisfy.farm_and_charm.core.block;
 
-import java.util.Optional;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.resources.ResourceLocation;
@@ -26,6 +25,8 @@ import net.satisfy.farm_and_charm.core.block.entity.StorageBlockEntity;
 import net.satisfy.farm_and_charm.core.util.Util;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+
+import java.util.Optional;
 
 @SuppressWarnings("deprecation, unused")
 public abstract class StorageBlock extends FacingBlock implements EntityBlock {

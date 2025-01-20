@@ -1,6 +1,5 @@
 package net.satisfy.farm_and_charm.core.block.entity;
 
-import java.util.Iterator;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.NonNullList;
 import net.minecraft.nbt.CompoundTag;
@@ -17,6 +16,8 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.satisfy.farm_and_charm.core.registry.EntityTypeRegistry;
 import net.satisfy.farm_and_charm.core.util.Util;
 import org.jetbrains.annotations.NotNull;
+
+import java.util.Iterator;
 
 public class StorageBlockEntity extends BlockEntity {
     private int size;
