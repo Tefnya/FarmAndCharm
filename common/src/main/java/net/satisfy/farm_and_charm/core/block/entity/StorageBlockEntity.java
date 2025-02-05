@@ -17,8 +17,6 @@ import net.satisfy.farm_and_charm.core.registry.EntityTypeRegistry;
 import net.satisfy.farm_and_charm.core.util.Util;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.Iterator;
-
 public class StorageBlockEntity extends BlockEntity {
     private int size;
     private NonNullList<ItemStack> inventory;
@@ -34,7 +32,7 @@ public class StorageBlockEntity extends BlockEntity {
     }
 
     public ItemStack removeStack(int slot) {
-        ItemStack stack = (ItemStack)this.inventory.set(slot, ItemStack.EMPTY);
+        ItemStack stack = this.inventory.set(slot, ItemStack.EMPTY);
         this.setChanged();
         return stack;
     }
@@ -49,10 +47,8 @@ public class StorageBlockEntity extends BlockEntity {
         if (var2 instanceof ServerLevel serverLevel) {
             if (!this.level.isClientSide()) {
                 Packet<ClientGamePacketListener> updatePacket = this.getUpdatePacket();
-                Iterator var3 = Util.tracking(serverLevel, this.getBlockPos()).iterator();
 
-                while(var3.hasNext()) {
-                    ServerPlayer player = (ServerPlayer)var3.next();
+                for (ServerPlayer player : Util.tracking(serverLevel, this.getBlockPos())) {
                     player.connection.send(updatePacket);
                 }
             }
@@ -84,7 +80,7 @@ public class StorageBlockEntity extends BlockEntity {
 
     public void setInventory(NonNullList<ItemStack> inventory) {
         for(int i = 0; i < inventory.size(); ++i) {
-            this.inventory.set(i, (ItemStack)inventory.get(i));
+            this.inventory.set(i, inventory.get(i));
         }
 
     }
