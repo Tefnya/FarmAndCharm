@@ -29,6 +29,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
 import net.satisfy.farm_and_charm.client.gui.handler.StoveGuiHandler;
 import net.satisfy.farm_and_charm.core.block.StoveBlock;
+import net.satisfy.farm_and_charm.core.item.food.EffectBlockItem;
 import net.satisfy.farm_and_charm.core.item.food.EffectFood;
 import net.satisfy.farm_and_charm.core.item.food.EffectFoodHelper;
 import net.satisfy.farm_and_charm.core.recipe.StoveRecipe;
@@ -45,9 +46,7 @@ import java.util.Objects;
 
 public class StoveBlockEntity extends BlockEntity implements BlockEntityTicker<StoveBlockEntity>, ImplementedInventory, MenuProvider {
     public static final int TOTAL_COOKING_TIME = 240;
-    protected static final int FUEL_SLOT = StoveGuiHandler.FUEL_SLOT;
     protected static final int[] INGREDIENT_SLOTS = {1, 2, 3};
-    protected static final int OUTPUT_SLOT = StoveGuiHandler.OUTPUT_SLOT;
     protected int burnTime;
     protected int burnTimeTotal;
     protected int cookTime;
@@ -92,7 +91,7 @@ public class StoveBlockEntity extends BlockEntity implements BlockEntityTicker<S
     }
 
     public int getOutputSlot() {
-        return OUTPUT_SLOT;
+        return 0;
     }
 
     public void dropExperience(ServerLevel world, Vec3 pos) {
@@ -104,8 +103,8 @@ public class StoveBlockEntity extends BlockEntity implements BlockEntityTicker<S
         if (side.equals(Direction.UP)) {
             return INGREDIENT_SLOTS;
         } else if (side.equals(Direction.DOWN)) {
-            return new int[]{OUTPUT_SLOT};
-        } else return new int[]{FUEL_SLOT};
+            return new int[]{0};
+        } else return new int[]{4};
     }
 
     @Override
@@ -116,7 +115,7 @@ public class StoveBlockEntity extends BlockEntity implements BlockEntityTicker<S
         this.burnTime = nbt.getShort("BurnTime");
         this.cookTime = nbt.getShort("CookTime");
         this.cookTimeTotal = nbt.getShort("CookTimeTotal");
-        this.burnTimeTotal = this.getTotalBurnTime(this.getItem(FUEL_SLOT));
+        this.burnTimeTotal = this.getTotalBurnTime(this.getItem(4));
         this.experience = nbt.getFloat("Experience");
     }
 
@@ -149,16 +148,16 @@ public class StoveBlockEntity extends BlockEntity implements BlockEntityTicker<S
         assert level != null;
         RegistryAccess access = level.registryAccess();
         if (!initialBurningState && canCraft(recipe, access)) {
-            this.burnTime = this.burnTimeTotal = this.getTotalBurnTime(this.getItem(FUEL_SLOT));
+            this.burnTime = this.burnTimeTotal = this.getTotalBurnTime(this.getItem(4));
             if (burnTime > 0) {
                 dirty = true;
-                final ItemStack fuelStack = this.getItem(FUEL_SLOT);
+                final ItemStack fuelStack = this.getItem(4);
                 if (fuelStack.getItem().hasCraftingRemainingItem()) {
-                    setItem(FUEL_SLOT, new ItemStack(Objects.requireNonNull(fuelStack.getItem().getCraftingRemainingItem())));
+                    setItem(4, new ItemStack(Objects.requireNonNull(fuelStack.getItem().getCraftingRemainingItem())));
                 } else if (fuelStack.getCount() > 1) {
-                    removeItem(FUEL_SLOT, 1);
+                    removeItem(4, 1);
                 } else if (fuelStack.getCount() == 1) {
-                    setItem(FUEL_SLOT, ItemStack.EMPTY);
+                    setItem(4, ItemStack.EMPTY);
                 }
             }
         }
@@ -202,7 +201,7 @@ public class StoveBlockEntity extends BlockEntity implements BlockEntityTicker<S
             if (!found) return false;
         }
         ItemStack recipeOutput = recipe.getResultItem(access);
-        ItemStack outputSlotStack = this.getItem(OUTPUT_SLOT);
+        ItemStack outputSlotStack = this.getItem(0);
         if (outputSlotStack.isEmpty()) return true;
         if (!ItemStack.isSameItemSameTags(outputSlotStack, recipeOutput)) return false;
         return outputSlotStack.getCount() + recipeOutput.getCount() <= outputSlotStack.getMaxStackSize();
@@ -212,11 +211,11 @@ public class StoveBlockEntity extends BlockEntity implements BlockEntityTicker<S
         if (recipe == null || !canCraft(recipe, access)) return;
 
         ItemStack recipeOutput = recipe.getResultItem(access).copy();
-        ItemStack outputSlotStack = this.getItem(OUTPUT_SLOT);
+        ItemStack outputSlotStack = this.getItem(0);
 
         for (int slot : INGREDIENT_SLOTS) {
             ItemStack ingredientStack = this.getItem(slot);
-            if (!ingredientStack.isEmpty() && ingredientStack.getItem() instanceof EffectFood) {
+            if (!ingredientStack.isEmpty() && (ingredientStack.getItem() instanceof EffectFood || ingredientStack.getItem() instanceof EffectBlockItem)) {
                 CompoundTag ingredientTag = ingredientStack.getTag();
                 if (ingredientTag != null && ingredientTag.contains(EffectFoodHelper.STORED_EFFECTS_KEY)) {
                     CompoundTag resultTag = recipeOutput.getOrCreateTag();
@@ -227,7 +226,7 @@ public class StoveBlockEntity extends BlockEntity implements BlockEntityTicker<S
         }
 
         if (outputSlotStack.isEmpty()) {
-            setItem(OUTPUT_SLOT, recipeOutput);
+            setItem(0, recipeOutput);
         } else if (ItemStack.isSameItemSameTags(outputSlotStack, recipeOutput)) {
             outputSlotStack.grow(recipeOutput.getCount());
         }

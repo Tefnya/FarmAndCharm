@@ -113,31 +113,30 @@ public class MincerBlock extends BaseEntityBlock {
         ItemStack playerStack = player.getItemInHand(hand);
 
         if (entity instanceof MincerBlockEntity mincer) {
-
             if (player.isShiftKeyDown()) {
-                Containers.dropContents(level, pos, mincer);
+                for (int slot = 0; slot < mincer.getContainerSize(); slot++) {
+                    ItemStack stack = mincer.removeItem(slot, mincer.getItem(slot).getCount());
+                    if (!stack.isEmpty()) {
+                        Containers.dropItemStack(level, pos.getX(), pos.getY(), pos.getZ(), stack);
+                    }
+                }
                 return InteractionResult.SUCCESS;
             }
 
             ItemStack inputStack = mincer.getItem(mincer.INPUT_SLOT);
-
             int crank = state.getValue(CRANK);
             int cranked = state.getValue(CRANKED);
 
             if (!playerStack.isEmpty() && crank == 0) {
-
                 if (player.isCreative()) {
-
                     ItemStack playerStackCopy = playerStack.copy();
                     playerStackCopy.setCount(playerStackCopy.getMaxStackSize());
                     mincer.setItem(mincer.INPUT_SLOT, playerStackCopy);
-
                     return InteractionResult.SUCCESS;
                 }
 
                 if (mincer.canPlaceItem(mincer.INPUT_SLOT, playerStack)) {
                     if (inputStack.is(playerStack.getItem())) {
-
                         int countInPlayerHand = playerStack.getCount();
                         int insertableCount = inputStack.getMaxStackSize() - inputStack.getCount();
                         int countToTakeFromPlayer = 0;
@@ -162,11 +161,11 @@ public class MincerBlock extends BaseEntityBlock {
                     return InteractionResult.sidedSuccess(level.isClientSide());
                 }
             } else if (playerStack.isEmpty()) {
-
                 if (cranked >= CRANKS_NEEDED && crank == 0) {
                     level.setBlock(pos, state.setValue(CRANKED, 0), Block.UPDATE_ALL);
                     return InteractionResult.SUCCESS;
                 }
+
                 if (level instanceof ServerLevel serverWorld) {
                     for (ItemStack stack : mincer.getItems()) {
                         if (!stack.isEmpty() && mincer.getItem(mincer.OUTPUT_SLOT) != stack) {
@@ -177,7 +176,6 @@ public class MincerBlock extends BaseEntityBlock {
                 }
 
                 if (crank <= 6) {
-
                     level.setBlock(pos, state.setValue(CRANK, 10), Block.UPDATE_ALL);
                     level.playSound(null, pos, SoundEventRegistry.MINCER_CRANKING.get(), SoundSource.BLOCKS, 1.0F, 2.5F);
                     return InteractionResult.SUCCESS;
@@ -188,6 +186,7 @@ public class MincerBlock extends BaseEntityBlock {
                 level.setBlock(pos, state.setValue(CRANKED, 0), Block.UPDATE_ALL);
                 return InteractionResult.SUCCESS;
             }
+
             if (level instanceof ServerLevel serverWorld) {
                 for (ItemStack stack : mincer.getItems()) {
                     if (!stack.isEmpty() && mincer.getItem(mincer.OUTPUT_SLOT) != stack) {
@@ -198,15 +197,14 @@ public class MincerBlock extends BaseEntityBlock {
             }
 
             if (crank <= 6) {
-
                 level.setBlock(pos, state.setValue(CRANK, 10), Block.UPDATE_ALL);
                 level.playSound(null, pos, SoundEventRegistry.MINCER_CRANKING.get(), SoundSource.BLOCKS, 0.05f, 2.5F);
                 return InteractionResult.SUCCESS;
             }
-
         }
         return InteractionResult.SUCCESS;
     }
+
 
     @Override
     public boolean canSurvive(BlockState state, LevelReader world, BlockPos pos) {
