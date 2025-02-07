@@ -32,6 +32,7 @@ public class EffectFoodItem extends Item implements EffectFood {
                 if (effect.getFirst() != null && world.random.nextFloat() < effect.getSecond()) {
                     user.addEffect(new MobEffectInstance(effect.getFirst()));
                 }
+                
             }
         }
 

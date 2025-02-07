@@ -29,6 +29,8 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
 import net.satisfy.farm_and_charm.client.gui.handler.StoveGuiHandler;
 import net.satisfy.farm_and_charm.core.block.StoveBlock;
+import net.satisfy.farm_and_charm.core.item.food.EffectFood;
+import net.satisfy.farm_and_charm.core.item.food.EffectFoodHelper;
 import net.satisfy.farm_and_charm.core.recipe.StoveRecipe;
 import net.satisfy.farm_and_charm.core.registry.EntityTypeRegistry;
 import net.satisfy.farm_and_charm.core.registry.RecipeTypeRegistry;
@@ -208,13 +210,28 @@ public class StoveBlockEntity extends BlockEntity implements BlockEntityTicker<S
 
     protected void craft(StoveRecipe recipe, RegistryAccess access) {
         if (recipe == null || !canCraft(recipe, access)) return;
+
         ItemStack recipeOutput = recipe.getResultItem(access).copy();
         ItemStack outputSlotStack = this.getItem(OUTPUT_SLOT);
+
+        for (int slot : INGREDIENT_SLOTS) {
+            ItemStack ingredientStack = this.getItem(slot);
+            if (!ingredientStack.isEmpty() && ingredientStack.getItem() instanceof EffectFood) {
+                CompoundTag ingredientTag = ingredientStack.getTag();
+                if (ingredientTag != null && ingredientTag.contains(EffectFoodHelper.STORED_EFFECTS_KEY)) {
+                    CompoundTag resultTag = recipeOutput.getOrCreateTag();
+                    resultTag.put(EffectFoodHelper.STORED_EFFECTS_KEY, ingredientTag.get(EffectFoodHelper.STORED_EFFECTS_KEY));
+                    recipeOutput.setTag(resultTag);
+                }
+            }
+        }
+
         if (outputSlotStack.isEmpty()) {
             setItem(OUTPUT_SLOT, recipeOutput);
         } else if (ItemStack.isSameItemSameTags(outputSlotStack, recipeOutput)) {
             outputSlotStack.grow(recipeOutput.getCount());
         }
+
         for (Ingredient ingredient : recipe.getIngredients()) {
             for (int slot : INGREDIENT_SLOTS) {
                 ItemStack stackInSlot = this.getItem(slot);
@@ -249,6 +266,7 @@ public class StoveBlockEntity extends BlockEntity implements BlockEntityTicker<S
             }
         }
     }
+
 
     protected int getTotalBurnTime(ItemStack fuel) {
         if (fuel.isEmpty()) {
