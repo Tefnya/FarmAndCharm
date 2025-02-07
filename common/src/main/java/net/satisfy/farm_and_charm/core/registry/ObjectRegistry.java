@@ -9,10 +9,7 @@ import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.food.Foods;
-import net.minecraft.world.item.HoeItem;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.item.ItemNameBlockItem;
-import net.minecraft.world.item.Tiers;
+import net.minecraft.world.item.*;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.material.MapColor;
@@ -37,7 +34,7 @@ public class ObjectRegistry {
     public static final Registrar<Item> ITEM_REGISTRAR = ITEMS.getRegistrar();
     public static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(FarmAndCharm.MOD_ID, Registries.BLOCK);
     public static final Registrar<Block> BLOCK_REGISTRAR = BLOCKS.getRegistrar();
-    public static final RegistrySupplier<Item> FERTILIZER = registerItem("fertilizer", () -> new FertilizerItem(getSettings()));
+    public static final RegistrySupplier<Item> FERTILIZER = registerItem("fertilizer", () -> new BoneMealItem(getSettings()));
     public static final RegistrySupplier<Item> PITCHFORK = registerItem("pitchfork", () -> new HoeItem(Tiers.IRON, -1, -1.0F, new Item.Properties()));
     public static final RegistrySupplier<Item> SUPPLY_CART = registerItem("supply_cart", () -> new CartItem(getSettings()));
     public static final RegistrySupplier<Item> PLOW = registerItem("plow", () -> new CartItem(getSettings()));
@@ -153,9 +150,7 @@ public class ObjectRegistry {
     public static final RegistrySupplier<Item> COOKED_SALMON = registerItem("cooked_salmon", () -> new EffectItem(getFoodItemSettings(PlatformHelper.getNutrition("cooked_salmon"), PlatformHelper.getSaturationMod("cooked_salmon"), MobEffectRegistry.SATIATION.get(), 4800), 4800, true));
     public static final RegistrySupplier<Item> COOKED_COD = registerItem("cooked_cod", () -> new EffectItem(getFoodItemSettings(PlatformHelper.getNutrition("cooked_cod"), PlatformHelper.getSaturationMod("cooked_cod"), MobEffectRegistry.SUSTENANCE.get(), 4800), 4800, true));
     public static final RegistrySupplier<Item> ROASTED_CHICKEN = registerItem("roasted_chicken", () -> new EffectItem(getFoodItemSettings(PlatformHelper.getNutrition("roasted_chicken"), PlatformHelper.getSaturationMod("roasted_chicken"), MobEffectRegistry.SATIATION.get(), 4800), 4800, false));
-
-
-
+    public static final RegistrySupplier<Item> COMPOST = registerItem("compost", () -> new FertilizerItem(getSettings()));
     public static final RegistrySupplier<Block> STRAWBERRY_TEA = registerTea("strawberry_tea", () -> new TeaJugBlock(BlockBehaviour.Properties.copy(Blocks.GLASS)), MobEffects.DIG_SPEED, 240);
     public static final RegistrySupplier<Block> NETTLE_TEA = registerTea("nettle_tea", () -> new TeaJugBlock(BlockBehaviour.Properties.copy(Blocks.GLASS)), MobEffects.HEAL, -0);
     public static final RegistrySupplier<Block> RIBWORT_TEA = registerTea("ribwort_tea", () -> new TeaJugBlock(BlockBehaviour.Properties.copy(Blocks.GLASS)), MobEffects.REGENERATION, 120);
