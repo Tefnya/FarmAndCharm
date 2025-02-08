@@ -1,8 +1,6 @@
-[Unreleased] - 2025.02.07
+[Unreleased] - 2025.02.08
 
-* The StoveBlockEntity needs testing with Candlelight to ensure compatibility. 
 * Additionally, cart movement could be significantly improved, particularly when navigating inclines and declines.
-
 
 **Added**
 * Added the ability to retrieve items from the MincerBlock by Shift-Right Clicking
@@ -16,6 +14,7 @@
 * Renamed the "get_minced_beef" advancement
 * Renamed the "introduction_drying" advancement
 * Renamed the "introduction_mincing" advancement
+* Pitchfork now uses the "handheld" model parent instead of "generated" – wield it like a true weapon! (even if it technically isn't one)
 
 **Fixed**
 * Added an additional check for a valid recipe before increasing the Stirring value in CraftingBowlBlockEntity

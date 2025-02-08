@@ -132,17 +132,21 @@ public class CookingPotBlockEntity extends BlockEntity implements BlockEntityTic
         if (!canCraft(recipe, access)) return;
         ItemStack recipeOutput = generateOutputItem(recipe, access);
         ItemStack outputSlotStack = getItem(OUTPUT_SLOT);
+
         if (outputSlotStack.isEmpty()) {
             setItem(OUTPUT_SLOT, recipeOutput);
         } else if (isSameItemSameTags(outputSlotStack, recipeOutput)) {
             outputSlotStack.grow(recipeOutput.getCount());
         }
+
         if (recipe instanceof CookingPotRecipe cookingRecipe) {
             for (var ingredient : cookingRecipe.getIngredients()) {
                 for (int slot = 0; slot < INGREDIENTS_AREA; slot++) {
                     ItemStack stack = getItem(slot);
                     if (ingredient.test(stack) && !stack.isEmpty()) {
-                        ItemStack remainderStack = stack.getItem().hasCraftingRemainingItem() ? new ItemStack(Objects.requireNonNull(stack.getItem().getCraftingRemainingItem())) : ItemStack.EMPTY;
+                        ItemStack remainderStack = stack.getItem().hasCraftingRemainingItem()
+                                ? new ItemStack(Objects.requireNonNull(stack.getItem().getCraftingRemainingItem()))
+                                : ItemStack.EMPTY;
                         stack.shrink(1);
                         if (!remainderStack.isEmpty()) {
                             if (getItem(slot).isEmpty()) {
@@ -171,6 +175,7 @@ public class CookingPotBlockEntity extends BlockEntity implements BlockEntityTic
                     }
                 }
             }
+
             if (cookingRecipe.isContainerRequired()) {
                 ItemStack containerSlotStack = getItem(CONTAINER_SLOT);
                 if (!containerSlotStack.isEmpty()) {
@@ -179,7 +184,20 @@ public class CookingPotBlockEntity extends BlockEntity implements BlockEntityTic
                 }
             }
         }
+
+        for (int slot = 0; slot < INGREDIENTS_AREA; slot++) {
+            ItemStack ingredientStack = this.getItem(slot);
+            if (!ingredientStack.isEmpty() && ingredientStack.getItem() instanceof EffectFood) {
+                CompoundTag ingredientTag = ingredientStack.getTag();
+                if (ingredientTag != null && ingredientTag.contains(EffectFoodHelper.STORED_EFFECTS_KEY)) {
+                    CompoundTag resultTag = recipeOutput.getOrCreateTag();
+                    resultTag.put(EffectFoodHelper.STORED_EFFECTS_KEY, ingredientTag.get(EffectFoodHelper.STORED_EFFECTS_KEY));
+                    recipeOutput.setTag(resultTag);
+                }
+            }
+        }
     }
+
 
     private ItemStack generateOutputItem(Recipe<?> recipe, RegistryAccess access) {
         ItemStack outputStack = recipe.getResultItem(access).copy();

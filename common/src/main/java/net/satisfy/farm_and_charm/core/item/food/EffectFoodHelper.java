@@ -112,6 +112,26 @@ public class EffectFoodHelper {
         }
     }
 
+    public static void applyEffects(ItemStack stack) {
+        CompoundTag tag = stack.getOrCreateTag();
+        if (!tag.contains(STORED_EFFECTS_KEY)) {
+            FoodProperties foodProperties = stack.getItem().getFoodProperties();
+            if (foodProperties != null) {
+                ListTag nbtList = new ListTag();
+                for (Pair<MobEffectInstance, Float> effect : foodProperties.getEffects()) {
+                    int id = MobEffect.getId(effect.getFirst().getEffect());
+                    CompoundTag effectTag = new CompoundTag();
+                    effectTag.putShort("id", (short) id);
+                    effectTag.putInt("duration", effect.getFirst().getDuration());
+                    effectTag.putInt("amplifier", effect.getFirst().getAmplifier());
+                    effectTag.putFloat("chance", effect.getSecond());
+                    nbtList.add(effectTag);
+                }
+                tag.put(STORED_EFFECTS_KEY, nbtList);
+            }
+        }
+    }
+
     public static List<Pair<MobEffectInstance, Float>> fromNbt(ListTag list) {
         List<Pair<MobEffectInstance, Float>> effects = Lists.newArrayList();
         for (int i = 0; i < list.size(); ++i) {
