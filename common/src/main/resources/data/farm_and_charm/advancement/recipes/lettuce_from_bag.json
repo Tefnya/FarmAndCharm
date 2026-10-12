@@ -2,17 +2,17 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "farm_and_charm:lettuce"
+      "farm_and_charm:lettuce_from_bag"
     ]
   },
   "criteria": {
-    "has_tomato_seeds": {
+    "has_item": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
           {
             "items": [
-              "farm_and_charm:tomato_seeds"
+              "farm_and_charm:lettuce_bag"
             ]
           }
         ]
@@ -21,13 +21,13 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "farm_and_charm:lettuce"
+        "recipe": "farm_and_charm:lettuce_from_bag"
       }
     }
   },
   "requirements": [
     [
-      "has_tomato_seeds",
+      "has_item",
       "has_the_recipe"
     ]
   ]

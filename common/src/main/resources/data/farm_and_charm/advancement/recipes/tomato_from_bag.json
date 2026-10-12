@@ -2,17 +2,17 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "farm_and_charm:strawberry"
+      "farm_and_charm:tomato_from_bag"
     ]
   },
   "criteria": {
-    "has_strawberry_seeds": {
+    "has_item": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
           {
             "items": [
-              "farm_and_charm:strawberry_seeds"
+              "farm_and_charm:tomato_bag"
             ]
           }
         ]
@@ -21,13 +21,13 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "farm_and_charm:strawberry"
+        "recipe": "farm_and_charm:tomato_from_bag"
       }
     }
   },
   "requirements": [
     [
-      "has_strawberry_seeds",
+      "has_item",
       "has_the_recipe"
     ]
   ]

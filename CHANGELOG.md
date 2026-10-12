@@ -1,13 +1,25 @@
 [1.1.28]
 
+**Added**
+* Bamboo Blocks can now be stripped in the Mincer
+
 **Fixed**
 * Tags like `c:strawberries`, `c:fruits`, `c:crops` and `c:oat` no longer end up in a loop that broke recipes in other mods. They now list their items directly instead of pointing to other tags
 * Tomatoes now grow up a Rope more reliably. A Rope hanging above the plant is enough, even when it hangs from a block
 * Sustenance now restores hunger and heals as often as set in the config, before it triggered much less often
+* Cleaned up Mincer recipes: Ores no longer show up twice, Iron Ore now only gives Raw Iron, Deepslate Iron Ore works again and Copper Ingots can no longer be minced back into Raw Copper
+* Crimson Stems and Crimson Hyphae no longer have duplicate stripping recipes in the Mincer
+* Iron and Golden Horse Armor now sound like metal in the Mincer
+* Crafting Strawberry Seeds now gives 3 Seeds like the other crops
+* The Copper Silo, Tool Rack and unpacking Corn, Lettuce, Tomato and Strawberry Bags now show up in the Recipe Book (Recipe Advancements)
 
 **Changed**
+* Rebalanced all meals based on what goes into them: a meal now gives a bit more than its ingredients would on their own. Roaster and Cooking Pot meals like Goulash, Cooked Salmon or Lamb with Corn are now much more filling. Enjoy!
+* Placed feasts like Stuffed Chicken, Baked Lamb Ham or Farmer's Bread give less per bite, since every bite counted as a full meal and a whole feast gave far more than its ingredients. A whole feast still fills more than a single meal
+* Bacon and Chicken Parts now give half and a third of a Porkchop and Chicken, since one piece of meat is cut into several
+* Existing config files keep their old food values, delete the `Food` entries to get the new ones
 * Optimized the config: some options were reorganized, so a few changed values in an existing config file are reset to their defaults
-* Config descriptions updated! Some were outdated or no longer matched what the option does, and missing German descriptions were added as well
+* Config descriptions updated! Some were outdated or no longer matched what the option does
 
 [1.1.27]
 
