@@ -17,12 +17,12 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.FenceBlock;
 import net.minecraft.world.level.block.state.BlockState;
-import net.satisfy.farm_and_charm.core.block.entity.RopeKnotBlockEntity;
 import net.satisfy.farm_and_charm.core.registry.ObjectRegistry;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 import java.util.Objects;
+import net.satisfy.foundation.block.mimic.MimicBlockEntity;
 
 public class RopeItem extends BlockItem {
     public RopeItem(Block block, Properties properties) {
@@ -40,9 +40,8 @@ public class RopeItem extends BlockItem {
                 BlockState knot = ObjectRegistry.ROPE_KNOT.get().defaultBlockState();
                 if (level.setBlock(pos, knot, 3)) {
                     level.playSound(ctx.getPlayer(), pos, SoundEvents.LEASH_KNOT_PLACE, SoundSource.BLOCKS, 1.0F, 1.0F);
-                    if (level.getBlockEntity(pos) instanceof RopeKnotBlockEntity be) {
-                        be.setHeldBlock(clicked);
-                        be.setChanged();
+                    if (level.getBlockEntity(pos) instanceof MimicBlockEntity be) {
+                        be.setMimicState(clicked);
                     }
                     if (!Objects.requireNonNull(ctx.getPlayer()).getAbilities().instabuild) {
                         ctx.getItemInHand().shrink(1);

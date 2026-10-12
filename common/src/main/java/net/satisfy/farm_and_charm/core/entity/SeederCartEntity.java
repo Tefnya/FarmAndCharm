@@ -174,8 +174,6 @@ public class SeederCartEntity extends AbstractCartEntity implements MenuProvider
         double ticks = Math.max(travelTicks, 1);
         double velocityX = (endX - startX) / ticks;
         double velocityZ = (endZ - startZ) / ticks;
-        // Vanilla item particles fall with gravity (~0.04/tick); aim high enough that
-        // the arc peaks roughly halfway through the flight before dropping onto the target.
         double gravity = 0.04D;
         double velocityY = (endY - startY) / ticks + gravity * ticks * 0.5D;
 

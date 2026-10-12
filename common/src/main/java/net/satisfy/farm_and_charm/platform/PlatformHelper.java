@@ -269,7 +269,7 @@ public abstract class PlatformHelper {
     }
 
     @ExpectPlatform
-    public static float getSaturationMod(String itemName) {
+    public static float getSaturation(String itemName) {
         throw new AssertionError();
     }
 

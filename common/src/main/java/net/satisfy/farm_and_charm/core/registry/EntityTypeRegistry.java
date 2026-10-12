@@ -20,6 +20,7 @@ import net.satisfy.farm_and_charm.core.entity.SupplyCartEntity;
 
 import java.util.HashSet;
 import java.util.function.Supplier;
+import net.satisfy.foundation.block.mimic.MimicBlockEntity;
 
 public class EntityTypeRegistry {
     private static final Registrar<BlockEntityType<?>> BLOCK_ENTITY_TYPES = DeferredRegister.create(FarmAndCharm.MOD_ID, Registries.BLOCK_ENTITY_TYPE).getRegistrar();
@@ -40,7 +41,7 @@ public class EntityTypeRegistry {
     public static final RegistrySupplier<BlockEntityType<MincerBlockEntity>> MINCER_BLOCK_ENTITY = registerBlockEntity("mincer", () -> BlockEntityType.Builder.of(MincerBlockEntity::new, ObjectRegistry.MINCER.get()).build(null));
     public static final RegistrySupplier<BlockEntityType<PetBowlBlockEntity>> PET_BOWL_BLOCK_ENTITY = registerBlockEntity("pet_bowl", () -> BlockEntityType.Builder.of(PetBowlBlockEntity::new, ObjectRegistry.PET_BOWL.get()).build(null));
     public static final RegistrySupplier<BlockEntityType<ChickenCoopBlockEntity>> CHICKEN_COOP_BLOCK_ENTITY = registerBlockEntity("chicken_coop", () -> BlockEntityType.Builder.of(ChickenCoopBlockEntity::new, ObjectRegistry.CHICKEN_COOP.get()).build(null));
-    public static final RegistrySupplier<BlockEntityType<RopeKnotBlockEntity>> ROPE_KNOT_BLOCK_ENTITY = registerBlockEntity("rope_knot", () -> BlockEntityType.Builder.of(RopeKnotBlockEntity::new, ObjectRegistry.ROPE_KNOT.get()).build(null));
+    public static final RegistrySupplier<BlockEntityType<MimicBlockEntity>> ROPE_KNOT_BLOCK_ENTITY = registerBlockEntity("rope_knot", () -> BlockEntityType.Builder.of((pos, state) -> new MimicBlockEntity(EntityTypeRegistry.ROPE_KNOT_BLOCK_ENTITY.get(), pos, state), ObjectRegistry.ROPE_KNOT.get()).build(null));
 
     public static final RegistrySupplier<EntityType<RottenTomatoEntity>> ROTTEN_TOMATO = registerEntityType("rotten_tomato", () -> EntityType.Builder.<RottenTomatoEntity>of(RottenTomatoEntity::new, MobCategory.MISC).sized(0.25f, 0.25f).build(FarmAndCharm.identifier("rotten_tomato").toString()));
     public static final RegistrySupplier<EntityType<SupplyCartEntity>> SUPPLY_CART = registerEntityType("cart", () -> EntityType.Builder.of(SupplyCartEntity::new, MobCategory.MISC).sized(1.875f, 0.875f).clientTrackingRange(10).build(FarmAndCharm.identifier("supply_cart").toString()));

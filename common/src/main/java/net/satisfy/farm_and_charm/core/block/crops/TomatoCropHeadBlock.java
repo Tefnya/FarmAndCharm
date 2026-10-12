@@ -60,6 +60,10 @@ public class TomatoCropHeadBlock extends ClimbingCropBlock implements Bonemealab
         return ObjectRegistry.ROTTEN_TOMATO.get();
     }
 
+    public static boolean canClimbInto(BlockState rope) {
+        return rope.getBlock() instanceof RopeBlock && !rope.getValue(RopeBlock.ROPE_KNOT);
+    }
+
     public static int getMaxHeight(LevelAccessor level, BlockPos pos) {
         BlockState self = level.getBlockState(pos);
         boolean supportedFlag = self.hasProperty(SUPPORTED) && self.getValue(SUPPORTED);
@@ -88,14 +92,7 @@ public class TomatoCropHeadBlock extends ClimbingCropBlock implements Bonemealab
             BlockPos up = pos.above();
             BlockState rope = level.getBlockState(up);
 
-            boolean ropeOk =
-                    rope.getBlock() instanceof RopeBlock
-                            && (!rope.hasProperty(RopeBlock.DOWN) || rope.getValue(RopeBlock.DOWN))
-                            && (!rope.hasProperty(RopeBlock.CENTER_PIECE) || rope.getValue(RopeBlock.CENTER_PIECE))
-                            && (!rope.hasProperty(RopeBlock.ROPE_KNOT) || !rope.getValue(RopeBlock.ROPE_KNOT))
-                            && (!rope.hasProperty(RopeBlock.SUPPORTING_ROPE_KNOT) || !rope.getValue(RopeBlock.SUPPORTING_ROPE_KNOT));
-
-            if (state.getValue(SUPPORTED) && ropeOk && getHeight(pos, level) < getMaxHeight(level, pos)) {
+            if (canClimbInto(rope) && getHeight(pos, level) < getMaxHeight(level, pos)) {
                 boolean supported = state.getValue(SUPPORTED);
                 BlockState body = ObjectRegistry.TOMATO_CROP_BODY.get()
                         .defaultBlockState()
@@ -117,14 +114,7 @@ public class TomatoCropHeadBlock extends ClimbingCropBlock implements Bonemealab
         BlockPos up = pos.above();
         BlockState rope = level.getBlockState(up);
 
-        boolean ropeOk =
-                rope.getBlock() instanceof RopeBlock
-                        && (!rope.hasProperty(RopeBlock.DOWN) || rope.getValue(RopeBlock.DOWN))
-                        && (!rope.hasProperty(RopeBlock.CENTER_PIECE) || rope.getValue(RopeBlock.CENTER_PIECE))
-                        && (!rope.hasProperty(RopeBlock.ROPE_KNOT) || !rope.getValue(RopeBlock.ROPE_KNOT))
-                        && (!rope.hasProperty(RopeBlock.SUPPORTING_ROPE_KNOT) || !rope.getValue(RopeBlock.SUPPORTING_ROPE_KNOT));
-
-        if (state.getValue(SUPPORTED) && ropeOk && getHeight(pos, level) < getMaxHeight(level, pos)) {
+        if (canClimbInto(rope) && getHeight(pos, level) < getMaxHeight(level, pos)) {
             boolean supported = state.getValue(SUPPORTED);
             BlockState body = ObjectRegistry.TOMATO_CROP_BODY.get()
                     .defaultBlockState()

@@ -6,7 +6,6 @@ import net.satisfy.farm_and_charm.platform.PlatformHelper;
 import net.satisfy.foundation.storage.StorageBlockEntityRenderer;
 import dev.architectury.registry.client.level.entity.EntityModelLayerRegistry;
 import dev.architectury.registry.client.level.entity.EntityRendererRegistry;
-import dev.architectury.registry.client.particle.ParticleProviderRegistry;
 import dev.architectury.registry.client.rendering.BlockEntityRendererRegistry;
 import dev.architectury.registry.client.rendering.ColorHandlerRegistry;
 import dev.architectury.registry.client.rendering.RenderTypeRegistry;
@@ -17,7 +16,6 @@ import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.ThrownItemRenderer;
 import net.satisfy.farm_and_charm.client.event.ClientEventHandler;
 import net.satisfy.foundation.ambient.FireflyAmbience;
-import net.satisfy.foundation.banner.CompletionistBannerRenderer;
 import net.satisfy.foundation.overlay.BlockInfoOverlay;
 import net.satisfy.farm_and_charm.client.gui.overlay.CraftingBowlInfoProvider;
 import net.satisfy.farm_and_charm.client.gui.overlay.CuttingBoardInfoProvider;
@@ -31,28 +29,22 @@ import net.satisfy.farm_and_charm.client.gui.PetBowlEditGui;
 import net.satisfy.farm_and_charm.client.gui.RoasterGui;
 import net.satisfy.farm_and_charm.client.gui.StoveGui;
 import net.satisfy.farm_and_charm.client.model.*;
-import net.satisfy.foundation.particle.DyeSplashParticle;
-import net.satisfy.foundation.particle.FeatherParticle;
-import net.satisfy.foundation.particle.FireflyParticle;
-import net.satisfy.foundation.particle.WaterDripParticle;
-import net.satisfy.foundation.particle.WaterSplashParticle;
-import net.satisfy.foundation.particle.SoupBubbleParticle;
-import net.satisfy.foundation.particle.SoupCookingBubbleParticle;
-import net.satisfy.foundation.particle.SoupSteamParticle;
 import net.satisfy.farm_and_charm.client.renderer.block.*;
-import net.satisfy.foundation.seat.ChairRenderer;
 import net.satisfy.farm_and_charm.client.renderer.entity.PlowCartRenderer;
 import net.satisfy.farm_and_charm.client.renderer.entity.SeederCartRenderer;
 import net.satisfy.farm_and_charm.client.renderer.entity.SupplyCartRenderer;
 import net.satisfy.farm_and_charm.core.block.entity.PetBowlBlockEntity;
 import net.satisfy.farm_and_charm.core.registry.EntityTypeRegistry;
-import net.satisfy.foundation.registry.FoundationParticles;
 import net.satisfy.farm_and_charm.core.registry.ScreenhandlerTypeRegistry;
 import net.satisfy.farm_and_charm.core.registry.StorageTypeRegistry;
 
 import static net.satisfy.farm_and_charm.core.registry.ObjectRegistry.*;
+import net.satisfy.foundation.client.mimic.MimicModels;
+import net.satisfy.farm_and_charm.core.registry.ObjectRegistry;
 
 public class FarmAndCharmClient {
+    private static boolean mimicModelsRegistered;
+
 
     public static void onInitializeClient() {
         RenderTypeRegistry.register(RenderType.cutout(), CRAFTING_BOWL.get(), CUTTING_BOARD.get(), WATER_SPRINKLER.get(),
@@ -103,7 +95,16 @@ public class FarmAndCharmClient {
     }
 
 
+    private static void registerMimicModels() {
+        if (mimicModelsRegistered) {
+            return;
+        }
+        mimicModelsRegistered = true;
+        MimicModels.held(ObjectRegistry.ROPE_KNOT);
+    }
+
     public static void preInitClient() {
+        registerMimicModels();
         registerEntityRenderers();
         registerEntityModelLayer();
     }
@@ -131,7 +132,6 @@ public class FarmAndCharmClient {
     }
 
     public static void registerBlockEntityRenderer() {
-        BlockEntityRendererRegistry.register(EntityTypeRegistry.ROPE_KNOT_BLOCK_ENTITY.get(), ctx -> new RopeKnotRenderer());
         BlockEntityRendererRegistry.register(EntityTypeRegistry.STOVE_BLOCK_ENTITY.get(), StoveBlockRenderer::new);
         BlockEntityRendererRegistry.register(EntityTypeRegistry.SCARECROW_BLOCK_ENTITY.get(), ScarecrowRenderer::new);
         BlockEntityRendererRegistry.register(EntityTypeRegistry.TIMBER_WELL_BLOCK_ENTITY.get(), TimberWellRenderer::new);

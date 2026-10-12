@@ -23,7 +23,7 @@ public class ScarecrowInfoProvider implements BlockInfoProvider {
         if (!(state.getBlock() instanceof ScarecrowBlock)) {
             return List.of();
         }
-        return List.of(InfoSection.lines(Component.translatable(state.getValue(ScarecrowBlock.MODE).getTranslationKey()),
-                List.of(Component.translatable("hud.farm_and_charm.scarecrow_hint").withStyle(ChatFormatting.GRAY))));
+        return List.of(InfoSection.title(Component.translatable(state.getValue(ScarecrowBlock.MODE).getTranslationKey())),
+                InfoSection.title(Component.translatable("hud.farm_and_charm.scarecrow_hint").withStyle(ChatFormatting.GRAY)));
     }
 }

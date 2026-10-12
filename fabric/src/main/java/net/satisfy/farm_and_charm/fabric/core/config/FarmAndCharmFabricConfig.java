@@ -7,7 +7,6 @@ import me.shedaniel.autoconfig.annotation.ConfigEntry;
 @Config(name = "farm_and_charm")
 @Config.Gui.Background("farm_and_charm:textures/block/fertilized_farmland_top.png")
 public class FarmAndCharmFabricConfig implements ConfigData {
-
     @ConfigEntry.Gui.CollapsibleObject
     public FarmingSettings farming = new FarmingSettings();
 
@@ -25,6 +24,9 @@ public class FarmAndCharmFabricConfig implements ConfigData {
 
     @ConfigEntry.Gui.CollapsibleObject
     public EffectsSettings effects = new EffectsSettings();
+
+    @ConfigEntry.Gui.CollapsibleObject
+    public MiscSettings misc = new MiscSettings();
 
     @ConfigEntry.Gui.CollapsibleObject
     public FoodSettings food = new FoodSettings();
@@ -156,9 +158,6 @@ public class FarmAndCharmFabricConfig implements ConfigData {
 
         @ConfigEntry.Gui.Tooltip
         public float cookingExperienceMultiplier = 1.0f;
-
-        @ConfigEntry.Gui.Tooltip
-        public boolean animations = true;
     }
 
     public static class InfoTooltipSettings {
@@ -250,61 +249,200 @@ public class FarmAndCharmFabricConfig implements ConfigData {
         }
     }
 
+    public static class MiscSettings {
+        @ConfigEntry.Gui.Tooltip
+        public boolean animations = true;
+    }
+
     public static class FoodSettings {
+        @ConfigEntry.Gui.Tooltip
+        @ConfigEntry.BoundedDiscrete(min = 0, max = 20)
         public int oatPancakeNutrition = 5;
-        public float oatPancakeSaturationMod = 0.6f;
+
+        @ConfigEntry.Gui.Tooltip
+        public float oatPancakeSaturation = 0.6f;
+
+        @ConfigEntry.Gui.Tooltip
+        @ConfigEntry.BoundedDiscrete(min = 0, max = 20)
         public int roastedCornNutrition = 5;
-        public float roastedCornSaturationMod = 0.5f;
+
+        @ConfigEntry.Gui.Tooltip
+        public float roastedCornSaturation = 0.5f;
+
+        @ConfigEntry.Gui.Tooltip
+        @ConfigEntry.BoundedDiscrete(min = 0, max = 20)
         public int potatoWithRoastMeatNutrition = 7;
-        public float potatoWithRoastMeatSaturationMod = 0.7f;
+
+        @ConfigEntry.Gui.Tooltip
+        public float potatoWithRoastMeatSaturation = 0.7f;
+
+        @ConfigEntry.Gui.Tooltip
+        @ConfigEntry.BoundedDiscrete(min = 0, max = 20)
         public int bakedLambHamNutrition = 8;
-        public float bakedLambHamSaturationMod = 0.9f;
+
+        @ConfigEntry.Gui.Tooltip
+        public float bakedLambHamSaturation = 0.9f;
+
+        @ConfigEntry.Gui.Tooltip
+        @ConfigEntry.BoundedDiscrete(min = 0, max = 20)
         public int farmersBreakfastNutrition = 12;
-        public float farmersBreakfastSaturationMod = 1.2f;
+
+        @ConfigEntry.Gui.Tooltip
+        public float farmersBreakfastSaturation = 1.2f;
+
+        @ConfigEntry.Gui.Tooltip
+        @ConfigEntry.BoundedDiscrete(min = 0, max = 20)
         public int stuffedChickenNutrition = 8;
-        public float stuffedChickenSaturationMod = 0.8f;
+
+        @ConfigEntry.Gui.Tooltip
+        public float stuffedChickenSaturation = 0.8f;
+
+        @ConfigEntry.Gui.Tooltip
+        @ConfigEntry.BoundedDiscrete(min = 0, max = 20)
         public int stuffedRabbitNutrition = 9;
-        public float stuffedRabbitSaturationMod = 0.9f;
+
+        @ConfigEntry.Gui.Tooltip
+        public float stuffedRabbitSaturation = 0.9f;
+
+        @ConfigEntry.Gui.Tooltip
+        @ConfigEntry.BoundedDiscrete(min = 0, max = 20)
         public int grandmothersStrawberryCakeNutrition = 4;
-        public float grandmothersStrawberryCakeSaturationMod = 0.7f;
+
+        @ConfigEntry.Gui.Tooltip
+        public float grandmothersStrawberryCakeSaturation = 0.7f;
+
+        @ConfigEntry.Gui.Tooltip
+        @ConfigEntry.BoundedDiscrete(min = 0, max = 20)
         public int farmersBreadNutrition = 6;
-        public float farmersBreadSaturationMod = 0.8f;
+
+        @ConfigEntry.Gui.Tooltip
+        public float farmersBreadSaturation = 0.8f;
+
+        @ConfigEntry.Gui.Tooltip
+        @ConfigEntry.BoundedDiscrete(min = 0, max = 20)
         public int farmerSaladNutrition = 7;
-        public float farmerSaladSaturationMod = 0.6f;
+
+        @ConfigEntry.Gui.Tooltip
+        public float farmerSaladSaturation = 0.6f;
+
+        @ConfigEntry.Gui.Tooltip
+        @ConfigEntry.BoundedDiscrete(min = 0, max = 20)
         public int goulashNutrition = 8;
-        public float goulashSaturationMod = 0.9f;
+
+        @ConfigEntry.Gui.Tooltip
+        public float goulashSaturation = 0.9f;
+
+        @ConfigEntry.Gui.Tooltip
+        @ConfigEntry.BoundedDiscrete(min = 0, max = 20)
         public int simpleTomatoSoupNutrition = 6;
-        public float simpleTomatoSoupSaturationMod = 0.6f;
+
+        @ConfigEntry.Gui.Tooltip
+        public float simpleTomatoSoupSaturation = 0.6f;
+
+        @ConfigEntry.Gui.Tooltip
+        @ConfigEntry.BoundedDiscrete(min = 0, max = 20)
         public int barleySoupNutrition = 5;
-        public float barleySoupSaturationMod = 0.8f;
+
+        @ConfigEntry.Gui.Tooltip
+        public float barleySoupSaturation = 0.8f;
+
+        @ConfigEntry.Gui.Tooltip
+        @ConfigEntry.BoundedDiscrete(min = 0, max = 20)
         public int onionSoupNutrition = 7;
-        public float onionSoupSaturationMod = 0.6f;
+
+        @ConfigEntry.Gui.Tooltip
+        public float onionSoupSaturation = 0.6f;
+
+        @ConfigEntry.Gui.Tooltip
+        @ConfigEntry.BoundedDiscrete(min = 0, max = 20)
         public int potatoSoupNutrition = 5;
-        public float potatoSoupSaturationMod = 0.6f;
+
+        @ConfigEntry.Gui.Tooltip
+        public float potatoSoupSaturation = 0.6f;
+
+        @ConfigEntry.Gui.Tooltip
+        @ConfigEntry.BoundedDiscrete(min = 0, max = 20)
         public int pastaWithOnionSauceNutrition = 6;
-        public float pastaWithOnionSauceSaturationMod = 0.7f;
+
+        @ConfigEntry.Gui.Tooltip
+        public float pastaWithOnionSauceSaturation = 0.7f;
+
+        @ConfigEntry.Gui.Tooltip
+        @ConfigEntry.BoundedDiscrete(min = 0, max = 20)
         public int cornGritsNutrition = 6;
-        public float cornGritsSaturationMod = 0.5f;
+
+        @ConfigEntry.Gui.Tooltip
+        public float cornGritsSaturation = 0.5f;
+
+        @ConfigEntry.Gui.Tooltip
+        @ConfigEntry.BoundedDiscrete(min = 0, max = 20)
         public int oatmealWithStrawberriesNutrition = 4;
-        public float oatmealWithStrawberriesSaturationMod = 0.8f;
+
+        @ConfigEntry.Gui.Tooltip
+        public float oatmealWithStrawberriesSaturation = 0.8f;
+
+        @ConfigEntry.Gui.Tooltip
+        @ConfigEntry.BoundedDiscrete(min = 0, max = 20)
         public int sausageWithOatPattyNutrition = 8;
-        public float sausageWithOatPattySaturationMod = 0.9f;
+
+        @ConfigEntry.Gui.Tooltip
+        public float sausageWithOatPattySaturation = 0.9f;
+
+        @ConfigEntry.Gui.Tooltip
+        @ConfigEntry.BoundedDiscrete(min = 0, max = 20)
         public int lambWithCornNutrition = 8;
-        public float lambWithCornSaturationMod = 0.8f;
+
+        @ConfigEntry.Gui.Tooltip
+        public float lambWithCornSaturation = 0.8f;
+
+        @ConfigEntry.Gui.Tooltip
+        @ConfigEntry.BoundedDiscrete(min = 0, max = 20)
         public int beefPattyWithVegetablesNutrition = 6;
-        public float beefPattyWithVegetablesSaturationMod = 0.8f;
+
+        @ConfigEntry.Gui.Tooltip
+        public float beefPattyWithVegetablesSaturation = 0.8f;
+
+        @ConfigEntry.Gui.Tooltip
+        @ConfigEntry.BoundedDiscrete(min = 0, max = 20)
         public int barleyPattiesWithPotatoesNutrition = 5;
-        public float barleyPattiesWithPotatoesSaturationMod = 0.9f;
+
+        @ConfigEntry.Gui.Tooltip
+        public float barleyPattiesWithPotatoesSaturation = 0.9f;
+
+        @ConfigEntry.Gui.Tooltip
+        @ConfigEntry.BoundedDiscrete(min = 0, max = 20)
         public int baconWithEggsNutrition = 6;
-        public float baconWithEggsSaturationMod = 0.7f;
+
+        @ConfigEntry.Gui.Tooltip
+        public float baconWithEggsSaturation = 0.7f;
+
+        @ConfigEntry.Gui.Tooltip
+        @ConfigEntry.BoundedDiscrete(min = 0, max = 20)
         public int chickenWrappedInBaconNutrition = 9;
-        public float chickenWrappedInBaconSaturationMod = 0.9f;
+
+        @ConfigEntry.Gui.Tooltip
+        public float chickenWrappedInBaconSaturation = 0.9f;
+
+        @ConfigEntry.Gui.Tooltip
+        @ConfigEntry.BoundedDiscrete(min = 0, max = 20)
         public int cookedSalmonNutrition = 7;
-        public float cookedSalmonSaturationMod = 0.9f;
+
+        @ConfigEntry.Gui.Tooltip
+        public float cookedSalmonSaturation = 0.9f;
+
+        @ConfigEntry.Gui.Tooltip
+        @ConfigEntry.BoundedDiscrete(min = 0, max = 20)
         public int cookedCodNutrition = 7;
-        public float cookedCodSaturationMod = 0.9f;
+
+        @ConfigEntry.Gui.Tooltip
+        public float cookedCodSaturation = 0.9f;
+
+        @ConfigEntry.Gui.Tooltip
+        @ConfigEntry.BoundedDiscrete(min = 0, max = 20)
         public int roastedChickenNutrition = 5;
-        public float roastedChickenSaturationMod = 0.8f;
+
+        @ConfigEntry.Gui.Tooltip
+        public float roastedChickenSaturation = 0.8f;
     }
 
     @Override

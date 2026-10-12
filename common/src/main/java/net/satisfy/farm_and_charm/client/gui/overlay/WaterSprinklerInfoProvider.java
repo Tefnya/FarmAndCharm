@@ -23,7 +23,7 @@ public class WaterSprinklerInfoProvider implements BlockInfoProvider {
         if (!(state.getBlock() instanceof WaterSprinklerBlock)) {
             return List.of();
         }
-        return List.of(InfoSection.lines(Component.translatable(state.getValue(WaterSprinklerBlock.PRESSURE).getTranslationKey()),
-                List.of(Component.translatable("hud.farm_and_charm.sprinkler_hint").withStyle(ChatFormatting.GRAY))));
+        return List.of(InfoSection.title(Component.translatable(state.getValue(WaterSprinklerBlock.PRESSURE).getTranslationKey())),
+                InfoSection.title(Component.translatable("hud.farm_and_charm.sprinkler_hint").withStyle(ChatFormatting.GRAY)));
     }
 }

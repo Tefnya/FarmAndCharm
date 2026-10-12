@@ -244,10 +244,6 @@ public class PlatformHelperImpl {
                 default -> 0;
             };
         } catch (IllegalStateException notLoadedYet) {
-            // Item registration (RegisterEvent) runs before ModConfigEvent.Loading on NeoForge,
-            // so the spec isn't loaded yet the first time food items are built. Fall back to the
-            // cached defaults here; ModifyDefaultComponentsEvent re-patches with the real config
-            // value once loading has actually happened (see FarmAndCharmNeoForge).
             return switch (itemName) {
                 case "oat_pancake" -> FarmAndCharmNeoForgeConfig.oatPancakeNutrition;
                 case "roasted_corn" -> FarmAndCharmNeoForgeConfig.roastedCornNutrition;
@@ -281,67 +277,67 @@ public class PlatformHelperImpl {
         }
     }
 
-    public static float getSaturationMod(String itemName) {
+    public static float getSaturation(String itemName) {
         try {
             return switch (itemName) {
-                case "oat_pancake" -> FarmAndCharmNeoForgeConfig.OAT_PANCAKE_SATURATION_MOD.get().floatValue();
-                case "roasted_corn" -> FarmAndCharmNeoForgeConfig.ROASTED_CORN_SATURATION_MOD.get().floatValue();
-                case "potato_with_roast_meat" -> FarmAndCharmNeoForgeConfig.POTATO_WITH_ROAST_MEAT_SATURATION_MOD.get().floatValue();
-                case "baked_lamb_ham" -> FarmAndCharmNeoForgeConfig.BAKED_LAMB_HAM_SATURATION_MOD.get().floatValue();
-                case "farmers_breakfast" -> FarmAndCharmNeoForgeConfig.FARMERS_BREAKFAST_SATURATION_MOD.get().floatValue();
-                case "stuffed_chicken" -> FarmAndCharmNeoForgeConfig.STUFFED_CHICKEN_SATURATION_MOD.get().floatValue();
-                case "stuffed_rabbit" -> FarmAndCharmNeoForgeConfig.STUFFED_RABBIT_SATURATION_MOD.get().floatValue();
-                case "grandmothers_strawberry_cake" -> FarmAndCharmNeoForgeConfig.GRANDMOTHERS_STRAWBERRY_CAKE_SATURATION_MOD.get().floatValue();
-                case "farmers_bread" -> FarmAndCharmNeoForgeConfig.FARMERS_BREAD_SATURATION_MOD.get().floatValue();
-                case "farmer_salad" -> FarmAndCharmNeoForgeConfig.FARMER_SALAD_SATURATION_MOD.get().floatValue();
-                case "goulash" -> FarmAndCharmNeoForgeConfig.GOULASH_SATURATION_MOD.get().floatValue();
-                case "simple_tomato_soup" -> FarmAndCharmNeoForgeConfig.SIMPLE_TOMATO_SOUP_SATURATION_MOD.get().floatValue();
-                case "barley_soup" -> FarmAndCharmNeoForgeConfig.BARLEY_SOUP_SATURATION_MOD.get().floatValue();
-                case "onion_soup" -> FarmAndCharmNeoForgeConfig.ONION_SOUP_SATURATION_MOD.get().floatValue();
-                case "potato_soup" -> FarmAndCharmNeoForgeConfig.POTATO_SOUP_SATURATION_MOD.get().floatValue();
-                case "pasta_with_onion_sauce" -> FarmAndCharmNeoForgeConfig.PASTA_WITH_ONION_SAUCE_SATURATION_MOD.get().floatValue();
-                case "corn_grits" -> FarmAndCharmNeoForgeConfig.CORN_GRITS_SATURATION_MOD.get().floatValue();
-                case "oatmeal_with_strawberries" -> FarmAndCharmNeoForgeConfig.OATMEAL_WITH_STRAWBERRIES_SATURATION_MOD.get().floatValue();
-                case "sausage_with_oat_patty" -> FarmAndCharmNeoForgeConfig.SAUSAGE_WITH_OAT_PATTY_SATURATION_MOD.get().floatValue();
-                case "lamb_with_corn" -> FarmAndCharmNeoForgeConfig.LAMB_WITH_CORN_SATURATION_MOD.get().floatValue();
-                case "beef_patty_with_vegetables" -> FarmAndCharmNeoForgeConfig.BEEF_PATTY_WITH_VEGETABLES_SATURATION_MOD.get().floatValue();
-                case "barley_patties_with_potatoes" -> FarmAndCharmNeoForgeConfig.BARLEY_PATTIES_WITH_POTATOES_SATURATION_MOD.get().floatValue();
-                case "bacon_with_eggs" -> FarmAndCharmNeoForgeConfig.BACON_WITH_EGGS_SATURATION_MOD.get().floatValue();
-                case "chicken_wrapped_in_bacon" -> FarmAndCharmNeoForgeConfig.CHICKEN_WRAPPED_IN_BACON_SATURATION_MOD.get().floatValue();
-                case "cooked_salmon" -> FarmAndCharmNeoForgeConfig.COOKED_SALMON_SATURATION_MOD.get().floatValue();
-                case "cooked_cod" -> FarmAndCharmNeoForgeConfig.COOKED_COD_SATURATION_MOD.get().floatValue();
-                case "roasted_chicken" -> FarmAndCharmNeoForgeConfig.ROASTED_CHICKEN_SATURATION_MOD.get().floatValue();
+                case "oat_pancake" -> FarmAndCharmNeoForgeConfig.OAT_PANCAKE_SATURATION.get().floatValue();
+                case "roasted_corn" -> FarmAndCharmNeoForgeConfig.ROASTED_CORN_SATURATION.get().floatValue();
+                case "potato_with_roast_meat" -> FarmAndCharmNeoForgeConfig.POTATO_WITH_ROAST_MEAT_SATURATION.get().floatValue();
+                case "baked_lamb_ham" -> FarmAndCharmNeoForgeConfig.BAKED_LAMB_HAM_SATURATION.get().floatValue();
+                case "farmers_breakfast" -> FarmAndCharmNeoForgeConfig.FARMERS_BREAKFAST_SATURATION.get().floatValue();
+                case "stuffed_chicken" -> FarmAndCharmNeoForgeConfig.STUFFED_CHICKEN_SATURATION.get().floatValue();
+                case "stuffed_rabbit" -> FarmAndCharmNeoForgeConfig.STUFFED_RABBIT_SATURATION.get().floatValue();
+                case "grandmothers_strawberry_cake" -> FarmAndCharmNeoForgeConfig.GRANDMOTHERS_STRAWBERRY_CAKE_SATURATION.get().floatValue();
+                case "farmers_bread" -> FarmAndCharmNeoForgeConfig.FARMERS_BREAD_SATURATION.get().floatValue();
+                case "farmer_salad" -> FarmAndCharmNeoForgeConfig.FARMER_SALAD_SATURATION.get().floatValue();
+                case "goulash" -> FarmAndCharmNeoForgeConfig.GOULASH_SATURATION.get().floatValue();
+                case "simple_tomato_soup" -> FarmAndCharmNeoForgeConfig.SIMPLE_TOMATO_SOUP_SATURATION.get().floatValue();
+                case "barley_soup" -> FarmAndCharmNeoForgeConfig.BARLEY_SOUP_SATURATION.get().floatValue();
+                case "onion_soup" -> FarmAndCharmNeoForgeConfig.ONION_SOUP_SATURATION.get().floatValue();
+                case "potato_soup" -> FarmAndCharmNeoForgeConfig.POTATO_SOUP_SATURATION.get().floatValue();
+                case "pasta_with_onion_sauce" -> FarmAndCharmNeoForgeConfig.PASTA_WITH_ONION_SAUCE_SATURATION.get().floatValue();
+                case "corn_grits" -> FarmAndCharmNeoForgeConfig.CORN_GRITS_SATURATION.get().floatValue();
+                case "oatmeal_with_strawberries" -> FarmAndCharmNeoForgeConfig.OATMEAL_WITH_STRAWBERRIES_SATURATION.get().floatValue();
+                case "sausage_with_oat_patty" -> FarmAndCharmNeoForgeConfig.SAUSAGE_WITH_OAT_PATTY_SATURATION.get().floatValue();
+                case "lamb_with_corn" -> FarmAndCharmNeoForgeConfig.LAMB_WITH_CORN_SATURATION.get().floatValue();
+                case "beef_patty_with_vegetables" -> FarmAndCharmNeoForgeConfig.BEEF_PATTY_WITH_VEGETABLES_SATURATION.get().floatValue();
+                case "barley_patties_with_potatoes" -> FarmAndCharmNeoForgeConfig.BARLEY_PATTIES_WITH_POTATOES_SATURATION.get().floatValue();
+                case "bacon_with_eggs" -> FarmAndCharmNeoForgeConfig.BACON_WITH_EGGS_SATURATION.get().floatValue();
+                case "chicken_wrapped_in_bacon" -> FarmAndCharmNeoForgeConfig.CHICKEN_WRAPPED_IN_BACON_SATURATION.get().floatValue();
+                case "cooked_salmon" -> FarmAndCharmNeoForgeConfig.COOKED_SALMON_SATURATION.get().floatValue();
+                case "cooked_cod" -> FarmAndCharmNeoForgeConfig.COOKED_COD_SATURATION.get().floatValue();
+                case "roasted_chicken" -> FarmAndCharmNeoForgeConfig.ROASTED_CHICKEN_SATURATION.get().floatValue();
                 default -> 0.0f;
             };
         } catch (IllegalStateException notLoadedYet) {
             return switch (itemName) {
-                case "oat_pancake" -> (float) FarmAndCharmNeoForgeConfig.oatPancakeSaturationMod;
-                case "roasted_corn" -> (float) FarmAndCharmNeoForgeConfig.roastedCornSaturationMod;
-                case "potato_with_roast_meat" -> (float) FarmAndCharmNeoForgeConfig.potatoWithRoastMeatSaturationMod;
-                case "baked_lamb_ham" -> (float) FarmAndCharmNeoForgeConfig.bakedLambHamSaturationMod;
-                case "farmers_breakfast" -> (float) FarmAndCharmNeoForgeConfig.farmersBreakfastSaturationMod;
-                case "stuffed_chicken" -> (float) FarmAndCharmNeoForgeConfig.stuffedChickenSaturationMod;
-                case "stuffed_rabbit" -> (float) FarmAndCharmNeoForgeConfig.stuffedRabbitSaturationMod;
-                case "grandmothers_strawberry_cake" -> (float) FarmAndCharmNeoForgeConfig.grandmothersStrawberryCakeSaturationMod;
-                case "farmers_bread" -> (float) FarmAndCharmNeoForgeConfig.farmersBreadSaturationMod;
-                case "farmer_salad" -> (float) FarmAndCharmNeoForgeConfig.farmerSaladSaturationMod;
-                case "goulash" -> (float) FarmAndCharmNeoForgeConfig.goulashSaturationMod;
-                case "simple_tomato_soup" -> (float) FarmAndCharmNeoForgeConfig.simpleTomatoSoupSaturationMod;
-                case "barley_soup" -> (float) FarmAndCharmNeoForgeConfig.barleySoupSaturationMod;
-                case "onion_soup" -> (float) FarmAndCharmNeoForgeConfig.onionSoupSaturationMod;
-                case "potato_soup" -> (float) FarmAndCharmNeoForgeConfig.potatoSoupSaturationMod;
-                case "pasta_with_onion_sauce" -> (float) FarmAndCharmNeoForgeConfig.pastaWithOnionSauceSaturationMod;
-                case "corn_grits" -> (float) FarmAndCharmNeoForgeConfig.cornGritsSaturationMod;
-                case "oatmeal_with_strawberries" -> (float) FarmAndCharmNeoForgeConfig.oatmealWithStrawberriesSaturationMod;
-                case "sausage_with_oat_patty" -> (float) FarmAndCharmNeoForgeConfig.sausageWithOatPattySaturationMod;
-                case "lamb_with_corn" -> (float) FarmAndCharmNeoForgeConfig.lambWithCornSaturationMod;
-                case "beef_patty_with_vegetables" -> (float) FarmAndCharmNeoForgeConfig.beefPattyWithVegetablesSaturationMod;
-                case "barley_patties_with_potatoes" -> (float) FarmAndCharmNeoForgeConfig.barleyPattiesWithPotatoesSaturationMod;
-                case "bacon_with_eggs" -> (float) FarmAndCharmNeoForgeConfig.baconWithEggsSaturationMod;
-                case "chicken_wrapped_in_bacon" -> (float) FarmAndCharmNeoForgeConfig.chickenWrappedInBaconSaturationMod;
-                case "cooked_salmon" -> (float) FarmAndCharmNeoForgeConfig.cookedSalmonSaturationMod;
-                case "cooked_cod" -> (float) FarmAndCharmNeoForgeConfig.cookedCodSaturationMod;
-                case "roasted_chicken" -> (float) FarmAndCharmNeoForgeConfig.roastedChickenSaturationMod;
+                case "oat_pancake" -> (float) FarmAndCharmNeoForgeConfig.oatPancakeSaturation;
+                case "roasted_corn" -> (float) FarmAndCharmNeoForgeConfig.roastedCornSaturation;
+                case "potato_with_roast_meat" -> (float) FarmAndCharmNeoForgeConfig.potatoWithRoastMeatSaturation;
+                case "baked_lamb_ham" -> (float) FarmAndCharmNeoForgeConfig.bakedLambHamSaturation;
+                case "farmers_breakfast" -> (float) FarmAndCharmNeoForgeConfig.farmersBreakfastSaturation;
+                case "stuffed_chicken" -> (float) FarmAndCharmNeoForgeConfig.stuffedChickenSaturation;
+                case "stuffed_rabbit" -> (float) FarmAndCharmNeoForgeConfig.stuffedRabbitSaturation;
+                case "grandmothers_strawberry_cake" -> (float) FarmAndCharmNeoForgeConfig.grandmothersStrawberryCakeSaturation;
+                case "farmers_bread" -> (float) FarmAndCharmNeoForgeConfig.farmersBreadSaturation;
+                case "farmer_salad" -> (float) FarmAndCharmNeoForgeConfig.farmerSaladSaturation;
+                case "goulash" -> (float) FarmAndCharmNeoForgeConfig.goulashSaturation;
+                case "simple_tomato_soup" -> (float) FarmAndCharmNeoForgeConfig.simpleTomatoSoupSaturation;
+                case "barley_soup" -> (float) FarmAndCharmNeoForgeConfig.barleySoupSaturation;
+                case "onion_soup" -> (float) FarmAndCharmNeoForgeConfig.onionSoupSaturation;
+                case "potato_soup" -> (float) FarmAndCharmNeoForgeConfig.potatoSoupSaturation;
+                case "pasta_with_onion_sauce" -> (float) FarmAndCharmNeoForgeConfig.pastaWithOnionSauceSaturation;
+                case "corn_grits" -> (float) FarmAndCharmNeoForgeConfig.cornGritsSaturation;
+                case "oatmeal_with_strawberries" -> (float) FarmAndCharmNeoForgeConfig.oatmealWithStrawberriesSaturation;
+                case "sausage_with_oat_patty" -> (float) FarmAndCharmNeoForgeConfig.sausageWithOatPattySaturation;
+                case "lamb_with_corn" -> (float) FarmAndCharmNeoForgeConfig.lambWithCornSaturation;
+                case "beef_patty_with_vegetables" -> (float) FarmAndCharmNeoForgeConfig.beefPattyWithVegetablesSaturation;
+                case "barley_patties_with_potatoes" -> (float) FarmAndCharmNeoForgeConfig.barleyPattiesWithPotatoesSaturation;
+                case "bacon_with_eggs" -> (float) FarmAndCharmNeoForgeConfig.baconWithEggsSaturation;
+                case "chicken_wrapped_in_bacon" -> (float) FarmAndCharmNeoForgeConfig.chickenWrappedInBaconSaturation;
+                case "cooked_salmon" -> (float) FarmAndCharmNeoForgeConfig.cookedSalmonSaturation;
+                case "cooked_cod" -> (float) FarmAndCharmNeoForgeConfig.cookedCodSaturation;
+                case "roasted_chicken" -> (float) FarmAndCharmNeoForgeConfig.roastedChickenSaturation;
                 default -> 0.0f;
             };
         }

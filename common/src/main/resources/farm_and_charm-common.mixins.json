@@ -30,8 +30,7 @@
     "RabbitMixin",
     "TemptGoalAccessor",
     "VanillaFarmlandPlantingParticlesMixin",
-    "WolfMixin",
-    "ZombieMixin"
+    "WolfMixin"
   ],
   "injectors": {
     "defaultRequire": 1

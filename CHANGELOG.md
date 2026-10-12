@@ -1,3 +1,14 @@
+[1.1.28]
+
+**Fixed**
+* Tags like `c:strawberries`, `c:fruits`, `c:crops` and `c:oat` no longer end up in a loop that broke recipes in other mods. They now list their items directly instead of pointing to other tags
+* Tomatoes now grow up a Rope more reliably. A Rope hanging above the plant is enough, even when it hangs from a block
+* Sustenance now restores hunger and heals as often as set in the config, before it triggered much less often
+
+**Changed**
+* Optimized the config: some options were reorganized, so a few changed values in an existing config file are reset to their defaults
+* Config descriptions updated! Some were outdated or no longer matched what the option does, and missing German descriptions were added as well
+
 [1.1.27]
 
 **Added**

@@ -10,6 +10,8 @@ import net.satisfy.farm_and_charm.core.registry.*;
 import net.satisfy.farm_and_charm.core.util.CartInteractionHooks;
 import net.satisfy.foundation.rarity.FoundationRarities;
 import net.satisfy.foundation.rarity.FoundationRarity;
+import net.satisfy.foundation.entity.equipment.ZombieEquipment;
+import net.minecraft.world.entity.EquipmentSlot;
 
 public class FarmAndCharm {
     public static final String MOD_ID = "farm_and_charm";
@@ -21,6 +23,8 @@ public class FarmAndCharm {
     public static void init() {
         MobEffectRegistry.init();
         ObjectRegistry.init();
+        ZombieEquipment.add(0.03).slot(EquipmentSlot.MAINHAND, ObjectRegistry.PITCHFORK);
+        CompostableRegistry.registerCompostable();
         FlammableBlockRegistry.init();
         FeatureRegistry.init();
         VanillaItemPlacements.init();

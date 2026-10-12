@@ -5,9 +5,6 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.satisfy.farm_and_charm.core.registry.EntityTypeRegistry;
 
-/**
- * Only exists on the top part of the Timber Well so the pump lever can be animated. Nothing is saved.
- */
 public class TimberWellBlockEntity extends BlockEntity {
     public static final int PUMP_EVENT = 1;
     public static final int PUMP_DURATION_TICKS = 12;

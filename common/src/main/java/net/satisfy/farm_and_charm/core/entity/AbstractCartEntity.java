@@ -104,9 +104,6 @@ public abstract class AbstractCartEntity extends Entity {
 
     @Override
     public @Nullable LivingEntity getControllingPassenger() {
-        // The cart is always simulated server-side (pulled by the horse). Reporting the rider as the
-        // controlling passenger would make vanilla treat the cart as client-authoritative, freezing it
-        // on the rider's client and letting stale vehicle-move packets drag it around on the server.
         return null;
     }
 

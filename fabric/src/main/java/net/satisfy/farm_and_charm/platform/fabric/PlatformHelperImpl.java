@@ -161,7 +161,7 @@ public class PlatformHelperImpl {
     }
 
     public static boolean animationsEnabled() {
-        return config().kitchen.animations;
+        return config().misc.animations;
     }
 
     public static boolean isCookingExperienceEnabled() {
@@ -250,36 +250,36 @@ public class PlatformHelperImpl {
         };
     }
 
-    public static float getSaturationMod(String itemName) {
+    public static float getSaturation(String itemName) {
         FarmAndCharmFabricConfig.FoodSettings food = config().food;
         return switch (itemName) {
-            case "oat_pancake" -> food.oatPancakeSaturationMod;
-            case "roasted_corn" -> food.roastedCornSaturationMod;
-            case "potato_with_roast_meat" -> food.potatoWithRoastMeatSaturationMod;
-            case "baked_lamb_ham" -> food.bakedLambHamSaturationMod;
-            case "farmers_breakfast" -> food.farmersBreakfastSaturationMod;
-            case "stuffed_chicken" -> food.stuffedChickenSaturationMod;
-            case "stuffed_rabbit" -> food.stuffedRabbitSaturationMod;
-            case "grandmothers_strawberry_cake" -> food.grandmothersStrawberryCakeSaturationMod;
-            case "farmers_bread" -> food.farmersBreadSaturationMod;
-            case "farmer_salad" -> food.farmerSaladSaturationMod;
-            case "goulash" -> food.goulashSaturationMod;
-            case "simple_tomato_soup" -> food.simpleTomatoSoupSaturationMod;
-            case "barley_soup" -> food.barleySoupSaturationMod;
-            case "onion_soup" -> food.onionSoupSaturationMod;
-            case "potato_soup" -> food.potatoSoupSaturationMod;
-            case "pasta_with_onion_sauce" -> food.pastaWithOnionSauceSaturationMod;
-            case "corn_grits" -> food.cornGritsSaturationMod;
-            case "oatmeal_with_strawberries" -> food.oatmealWithStrawberriesSaturationMod;
-            case "sausage_with_oat_patty" -> food.sausageWithOatPattySaturationMod;
-            case "lamb_with_corn" -> food.lambWithCornSaturationMod;
-            case "beef_patty_with_vegetables" -> food.beefPattyWithVegetablesSaturationMod;
-            case "barley_patties_with_potatoes" -> food.barleyPattiesWithPotatoesSaturationMod;
-            case "bacon_with_eggs" -> food.baconWithEggsSaturationMod;
-            case "chicken_wrapped_in_bacon" -> food.chickenWrappedInBaconSaturationMod;
-            case "cooked_salmon" -> food.cookedSalmonSaturationMod;
-            case "cooked_cod" -> food.cookedCodSaturationMod;
-            case "roasted_chicken" -> food.roastedChickenSaturationMod;
+            case "oat_pancake" -> food.oatPancakeSaturation;
+            case "roasted_corn" -> food.roastedCornSaturation;
+            case "potato_with_roast_meat" -> food.potatoWithRoastMeatSaturation;
+            case "baked_lamb_ham" -> food.bakedLambHamSaturation;
+            case "farmers_breakfast" -> food.farmersBreakfastSaturation;
+            case "stuffed_chicken" -> food.stuffedChickenSaturation;
+            case "stuffed_rabbit" -> food.stuffedRabbitSaturation;
+            case "grandmothers_strawberry_cake" -> food.grandmothersStrawberryCakeSaturation;
+            case "farmers_bread" -> food.farmersBreadSaturation;
+            case "farmer_salad" -> food.farmerSaladSaturation;
+            case "goulash" -> food.goulashSaturation;
+            case "simple_tomato_soup" -> food.simpleTomatoSoupSaturation;
+            case "barley_soup" -> food.barleySoupSaturation;
+            case "onion_soup" -> food.onionSoupSaturation;
+            case "potato_soup" -> food.potatoSoupSaturation;
+            case "pasta_with_onion_sauce" -> food.pastaWithOnionSauceSaturation;
+            case "corn_grits" -> food.cornGritsSaturation;
+            case "oatmeal_with_strawberries" -> food.oatmealWithStrawberriesSaturation;
+            case "sausage_with_oat_patty" -> food.sausageWithOatPattySaturation;
+            case "lamb_with_corn" -> food.lambWithCornSaturation;
+            case "beef_patty_with_vegetables" -> food.beefPattyWithVegetablesSaturation;
+            case "barley_patties_with_potatoes" -> food.barleyPattiesWithPotatoesSaturation;
+            case "bacon_with_eggs" -> food.baconWithEggsSaturation;
+            case "chicken_wrapped_in_bacon" -> food.chickenWrappedInBaconSaturation;
+            case "cooked_salmon" -> food.cookedSalmonSaturation;
+            case "cooked_cod" -> food.cookedCodSaturation;
+            case "roasted_chicken" -> food.roastedChickenSaturation;
             default -> 0.0f;
         };
     }

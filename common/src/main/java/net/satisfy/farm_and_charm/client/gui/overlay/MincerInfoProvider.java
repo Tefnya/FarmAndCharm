@@ -32,14 +32,14 @@ public class MincerInfoProvider implements BlockInfoProvider {
             return List.of();
         }
         List<InfoSection> sections = new ArrayList<>();
-        sections.add(InfoSection.icons(Component.translatable("hud.farm_and_charm.mincer_input"), List.of(input), InfoSection.ROW_COLUMNS));
+        sections.add(InfoSection.icons(Component.translatable("hud.farm_and_charm.mincer_input"), List.of(input), InfoSection.ROW_COLUMNS).withDecorations());
         MincerRecipe recipe = mincer.findRecipe(level);
         if (recipe != null) {
             sections.add(InfoSection.icons(Component.translatable("hud.farm_and_charm.result").withStyle(ChatFormatting.GREEN), List.of(recipe.getResultItem(level.registryAccess())), InfoSection.ROW_COLUMNS));
         }
         int cranked = (int) mincer.getCranked();
-        sections.add(InfoSection.lines(Component.translatable("hud.farm_and_charm.mincer_hint").withStyle(ChatFormatting.GRAY),
-                List.of(Component.translatable("hud.farm_and_charm.mincer_cranked", cranked, MincerBlock.CRANKS_NEEDED).withStyle(ChatFormatting.GRAY))));
+        sections.add(InfoSection.title(Component.translatable("hud.farm_and_charm.mincer_cranked", cranked, MincerBlock.CRANKS_NEEDED).withStyle(ChatFormatting.GRAY)));
+        sections.add(InfoSection.title(Component.translatable("hud.farm_and_charm.mincer_hint").withStyle(ChatFormatting.GRAY)));
         return sections;
     }
 }

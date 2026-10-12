@@ -35,10 +35,10 @@ public class StoveInfoProvider implements BlockInfoProvider {
         if (done) {
             status = Component.translatable("hud.farm_and_charm.grill_done").withStyle(ChatFormatting.GREEN);
         } else if (!stove.isLit()) {
-            status = Component.translatable("hud.farm_and_charm.grill_cold").withStyle(ChatFormatting.GRAY);
+            status = Component.translatable("hud.farm_and_charm.grill_cold").withStyle(ChatFormatting.GOLD);
         } else {
             int seconds = Mth.positiveCeilDiv(Math.max(0, stove.getGrillTotal(slot) - stove.getGrillProgress(slot)), 20);
-            status = Component.translatable("hud.farm_and_charm.grill_time", seconds).withStyle(ChatFormatting.GOLD);
+            status = Component.translatable("hud.farm_and_charm.grill_time", seconds).withStyle(ChatFormatting.YELLOW);
         }
         return List.of(
                 InfoSection.rows(Component.translatable("hud.farm_and_charm.grill"), List.of(InfoSection.Row.item(stack, stack.getHoverName().copy().append(" ").append(status)))),

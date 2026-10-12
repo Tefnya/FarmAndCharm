@@ -56,10 +56,6 @@ public class FarmAndCharmNeoForge {
         }
     }
 
-    /**
-     * Built-in packs live in the common module. In production they are shadowed into the mod jar, but in
-     * the dev environment the common resources are a separate classpath entry, so fall back to the classpath.
-     */
     private static @Nullable Path findBuiltinPack(String name) {
         Path modPath = ModList.get().getModFileById(FarmAndCharm.MOD_ID).getFile().findResource("resourcepacks", name);
         if (Files.exists(modPath.resolve("pack.mcmeta"))) return modPath;
@@ -71,13 +67,6 @@ public class FarmAndCharmNeoForge {
         return null;
     }
 
-    /**
-     * Item registration (RegisterEvent) runs before ModConfigEvent.Loading on NeoForge, so the
-     * food items in ObjectRegistry are built with whatever nutrition/saturation values were
-     * available at that point (see PlatformHelperImpl.getNutrition/getSaturationMod fallback).
-     * This event fires after the config has actually loaded, so re-patch the FOOD component here
-     * with the real configured values.
-     */
     private static void reapplyFoodConfig(ModifyDefaultComponentsEvent event) {
         patchFood(event, ObjectRegistry.OAT_PANCAKE, "oat_pancake");
         patchFood(event, ObjectRegistry.ROASTED_CORN, "roasted_corn");
@@ -115,7 +104,7 @@ public class FarmAndCharmNeoForge {
 
         FoodProperties updated = new FoodProperties(
                 PlatformHelperImpl.getNutrition(key),
-                PlatformHelperImpl.getSaturationMod(key),
+                PlatformHelperImpl.getSaturation(key),
                 current.canAlwaysEat(),
                 current.eatSeconds(),
                 current.usingConvertsTo(),

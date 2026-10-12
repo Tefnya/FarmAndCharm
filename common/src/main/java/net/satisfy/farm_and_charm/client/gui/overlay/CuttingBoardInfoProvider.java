@@ -58,7 +58,7 @@ public class CuttingBoardInfoProvider implements BlockInfoProvider {
             sections.add(InfoSection.icons(Component.translatable("hud.farm_and_charm.assembly_ready").withStyle(ChatFormatting.GREEN), List.of(assembled.get().value().getResult()), InfoSection.ROW_COLUMNS));
             sections.add(InfoSection.title(Component.translatable("hud.farm_and_charm.assemble_hint").withStyle(ChatFormatting.GRAY)));
         }
-        sections.add(InfoSection.icons(Component.translatable("hud.farm_and_charm.on_board"), items, InfoSection.ROW_COLUMNS));
+        sections.add(InfoSection.icons(Component.translatable("hud.farm_and_charm.on_board"), items, InfoSection.ROW_COLUMNS).withDecorations());
         if (items.size() == 1) {
             Optional<RecipeHolder<CuttingBoardRecipe>> chop = level.getRecipeManager().getRecipeFor(RecipeTypeRegistry.CUTTING_BOARD_RECIPE_TYPE.get(), new SingleRecipeInput(items.getFirst()), level);
             chop.ifPresent(recipe -> sections.add(InfoSection.title(Component.translatable("hud.farm_and_charm.chop", board.getChops(), CuttingBoardBlockEntity.requiredChops(Minecraft.getInstance().player.getMainHandItem(), recipe.value())).withStyle(ChatFormatting.GRAY))));

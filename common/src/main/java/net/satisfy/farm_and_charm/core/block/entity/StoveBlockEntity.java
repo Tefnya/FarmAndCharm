@@ -498,7 +498,6 @@ public class StoveBlockEntity extends BlockEntity implements BlockEntityTicker<S
             return false;
         }
 
-        // Ensure there are no extra ingredients present.
         int occupiedIngredientSlots = 0;
         for (int slot : INGREDIENT_SLOTS) {
             if (!inventory.get(slot).isEmpty()) {

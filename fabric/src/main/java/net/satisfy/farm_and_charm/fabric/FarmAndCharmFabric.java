@@ -9,7 +9,6 @@ import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.satisfy.farm_and_charm.FarmAndCharm;
-import net.satisfy.farm_and_charm.fabric.core.registry.CompostableRegistry;
 import net.satisfy.farm_and_charm.fabric.core.config.FarmAndCharmFabricConfig;
 import net.satisfy.farm_and_charm.fabric.core.world.FarmAndCharmBiomeModification;
 
@@ -18,7 +17,6 @@ public class FarmAndCharmFabric implements ModInitializer {
     public void onInitialize() {
         AutoConfig.register(FarmAndCharmFabricConfig.class, GsonConfigSerializer::new);
         FarmAndCharm.init();
-        CompostableRegistry.registerCompostable();
         FarmAndCharmBiomeModification.init();
         FabricLoader.getInstance().getModContainer(FarmAndCharm.MOD_ID).ifPresent(container ->
                 ResourceManagerHelper.registerBuiltinResourcePack(

@@ -23,16 +23,17 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.storage.loot.LootParams;
-import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
-import net.satisfy.farm_and_charm.core.block.entity.RopeKnotBlockEntity;
 import net.satisfy.farm_and_charm.core.registry.ObjectRegistry;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
+import net.satisfy.foundation.block.mimic.MimicBlock;
+import net.satisfy.foundation.block.mimic.MimicBlockEntity;
+import net.satisfy.farm_and_charm.core.registry.EntityTypeRegistry;
 
 public class RopeKnotBlock extends BaseEntityBlock {
     public static final MapCodec<RopeKnotBlock> CODEC = simpleCodec(RopeKnotBlock::new);
@@ -61,7 +62,7 @@ public class RopeKnotBlock extends BaseEntityBlock {
 
     @Override
     public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
-        return new RopeKnotBlockEntity(pos, state);
+        return new MimicBlockEntity(EntityTypeRegistry.ROPE_KNOT_BLOCK_ENTITY.get(), pos, state);
     }
 
     @Override
@@ -76,22 +77,15 @@ public class RopeKnotBlock extends BaseEntityBlock {
 
     @Override
     public @NotNull List<ItemStack> getDrops(BlockState state, LootParams.Builder builder) {
-        List<ItemStack> drops = super.getDrops(state, builder);
-        if (builder.getOptionalParameter(LootContextParams.BLOCK_ENTITY) instanceof RopeKnotBlockEntity be) {
-            BlockState held = be.getHeldBlock();
-            if (held != null && !held.isAir()) {
-                drops.add(new ItemStack(held.getBlock().asItem()));
-            }
-        }
-        return drops;
+        return MimicBlock.addDrops(super.getDrops(state, builder), builder);
     }
 
     @Override
     protected @NotNull ItemInteractionResult useItemOn(ItemStack stack, BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
         if (stack.getItem() instanceof ShearsItem || player.isShiftKeyDown()) {
-            if (!level.isClientSide && level.getBlockEntity(pos) instanceof RopeKnotBlockEntity be) {
+            if (!level.isClientSide && level.getBlockEntity(pos) instanceof MimicBlockEntity be) {
                 popResource(level, pos, new ItemStack(ObjectRegistry.ROPE.get()));
-                BlockState held = be.getHeldBlock();
+                BlockState held = be.getMimicState();
                 if (held != null && !held.isAir()) {
                     level.setBlock(pos, held, 11);
                 } else {
@@ -117,11 +111,11 @@ public class RopeKnotBlock extends BaseEntityBlock {
             state = state.setValue(getPropertyForDirection(dir), connected);
         }
 
-        if (level.getBlockEntity(pos) instanceof RopeKnotBlockEntity be) {
-            BlockState held = be.getHeldBlock();
+        if (level.getBlockEntity(pos) instanceof MimicBlockEntity be) {
+            BlockState held = be.getMimicState();
             if (held != null) {
                 BlockState updated = held.updateShape(dir, neighborState, level, pos, neighborPos);
-                be.setHeldBlock(updated);
+                be.setMimicState(updated);
             }
         }
 

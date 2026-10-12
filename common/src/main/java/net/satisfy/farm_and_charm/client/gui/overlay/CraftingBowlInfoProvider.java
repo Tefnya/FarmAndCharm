@@ -42,13 +42,13 @@ public class CraftingBowlInfoProvider implements BlockInfoProvider {
         if (ingredients.isEmpty()) {
             return sections;
         }
-        sections.add(InfoSection.icons(Component.translatable("hud.farm_and_charm.in_bowl"), ingredients, InfoSection.ROW_COLUMNS));
+        sections.add(InfoSection.icons(Component.translatable("hud.farm_and_charm.in_bowl"), ingredients, InfoSection.ROW_COLUMNS).withDecorations());
         bowl.findRecipe(level).ifPresent(recipe -> {
             ItemStack output = recipe.getResultItem(level.registryAccess()).copyWithCount(recipe.getOutputCount());
             sections.add(InfoSection.icons(Component.translatable("hud.farm_and_charm.result").withStyle(ChatFormatting.GREEN), List.of(output), InfoSection.ROW_COLUMNS));
             int stirred = (int) bowl.getStirred();
-            sections.add(InfoSection.lines(Component.translatable("hud.farm_and_charm.stir_hint").withStyle(ChatFormatting.GRAY),
-                    List.of(Component.translatable("hud.farm_and_charm.stirred", stirred, CraftingBowlBlock.STIRS_NEEDED).withStyle(ChatFormatting.GRAY))));
+            sections.add(InfoSection.title(Component.translatable("hud.farm_and_charm.stirred", stirred, CraftingBowlBlock.STIRS_NEEDED).withStyle(ChatFormatting.GRAY)));
+            sections.add(InfoSection.title(Component.translatable("hud.farm_and_charm.stir_hint").withStyle(ChatFormatting.GRAY)));
         });
         return sections;
     }

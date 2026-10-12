@@ -38,10 +38,10 @@ public class SiloInfoProvider implements BlockInfoProvider {
         List<InfoSection> sections = new ArrayList<>();
         sections.add(InfoSection.title(Component.translatable("hud.farm_and_charm.silo_filled", used, capacity).withStyle(ChatFormatting.GRAY)));
         if (!drying.isEmpty()) {
-            sections.add(InfoSection.icons(Component.translatable("hud.farm_and_charm.silo_drying"), drying, InfoSection.ROW_COLUMNS));
+            sections.add(InfoSection.icons(Component.translatable("hud.farm_and_charm.silo_drying"), drying, InfoSection.ROW_COLUMNS).withDecorations());
         }
         if (!dried.isEmpty()) {
-            sections.add(InfoSection.icons(Component.translatable("hud.farm_and_charm.silo_dried").withStyle(ChatFormatting.GREEN), dried, InfoSection.ROW_COLUMNS));
+            sections.add(InfoSection.icons(Component.translatable("hud.farm_and_charm.silo_dried").withStyle(ChatFormatting.GREEN), dried, InfoSection.ROW_COLUMNS).withDecorations());
             if (!state.getValue(SiloBlock.OPEN)) {
                 sections.add(InfoSection.title(Component.translatable("hud.farm_and_charm.silo_open_hint").withStyle(ChatFormatting.GRAY)));
             }

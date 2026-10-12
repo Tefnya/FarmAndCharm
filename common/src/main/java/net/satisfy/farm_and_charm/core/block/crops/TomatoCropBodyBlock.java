@@ -97,16 +97,8 @@ public class TomatoCropBodyBlock extends ClimbingCropBlock implements Bonemealab
             BlockPos up = headPos.above();
             BlockState rope = level.getBlockState(up);
 
-            boolean ropeOk =
-                    rope.getBlock() instanceof RopeBlock
-                            && (!rope.hasProperty(RopeBlock.DOWN) || rope.getValue(RopeBlock.DOWN))
-                            && (!rope.hasProperty(RopeBlock.CENTER_PIECE) || rope.getValue(RopeBlock.CENTER_PIECE))
-                            && (!rope.hasProperty(RopeBlock.ROPE_KNOT) || !rope.getValue(RopeBlock.ROPE_KNOT))
-                            && (!rope.hasProperty(RopeBlock.SUPPORTING_ROPE_KNOT) || !rope.getValue(RopeBlock.SUPPORTING_ROPE_KNOT));
-
-            if (headState.hasProperty(SUPPORTED)
-                    && headState.getValue(SUPPORTED)
-                    && ropeOk
+            if (headState.is(ObjectRegistry.TOMATO_CROP.get())
+                    && TomatoCropHeadBlock.canClimbInto(rope)
                     && TomatoCropHeadBlock.getHeight(headPos, level) < TomatoCropHeadBlock.getMaxHeight(level, headPos)) {
                 boolean supported = headState.getValue(SUPPORTED);
                 BlockState bodyAtHead = ObjectRegistry.TOMATO_CROP_BODY.get()

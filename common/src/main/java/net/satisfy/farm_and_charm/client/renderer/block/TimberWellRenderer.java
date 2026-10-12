@@ -19,7 +19,6 @@ import net.satisfy.farm_and_charm.core.block.entity.TimberWellBlockEntity;
 public class TimberWellRenderer implements BlockEntityRenderer<TimberWellBlockEntity> {
     private static final ResourceLocation TEXTURE = FarmAndCharm.identifier("textures/entity/well_pump.png");
 
-    // Pivot of the lever in block model space (pixels, well facing east). Blockbench pivot [8, 7, 0] = block space [16, 7, 8].
     private static final float PIVOT_X = 16.0F / 16.0F;
     private static final float PIVOT_Y = 7.0F / 16.0F;
     private static final float PIVOT_Z = 8.0F / 16.0F;
@@ -50,7 +49,6 @@ public class TimberWellRenderer implements BlockEntityRenderer<TimberWellBlockEn
         poseStack.translate(PIVOT_X, PIVOT_Y, PIVOT_Z);
         poseStack.mulPose(Axis.ZP.rotationDegrees(angle));
         poseStack.translate(-PIVOT_X, -PIVOT_Y, -PIVOT_Z);
-        // Blockbench entity space -> block model space
         poseStack.translate(0.5D, 1.5D, 0.5D);
         poseStack.scale(-1.0F, -1.0F, 1.0F);
 
@@ -58,9 +56,6 @@ public class TimberWellRenderer implements BlockEntityRenderer<TimberWellBlockEn
         poseStack.popPose();
     }
 
-    /**
-     * Pushes the lever quickly, then lets it spring back with a small overshoot.
-     */
     private static float getLeverAngle(float ticksSincePump) {
         float progress = ticksSincePump / TimberWellBlockEntity.PUMP_DURATION_TICKS;
         if (progress < 0.0F || progress >= 1.0F) {

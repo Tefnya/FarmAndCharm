@@ -46,14 +46,10 @@ public enum EquipmentTiers implements Tier {
     }
 
     @Override
-    public @NotNull TagKey<Block> getIncorrectBlocksForDrops() { // I don't need to port this method because it is deprecated... right?
+    public @NotNull TagKey<Block> getIncorrectBlocksForDrops() {
         return BlockTags.INCORRECT_FOR_STONE_TOOL;
     }
 
-//    @Override
-//    public int getLevel() {
-//        return this.level;
-//    }
 
     @Override
     public int getEnchantmentValue() {
