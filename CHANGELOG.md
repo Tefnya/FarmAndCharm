@@ -21,6 +21,8 @@
 * Optimized the config: some options were reorganized, so a few changed values in an existing config file are reset to their defaults
 * Config descriptions updated! Some were outdated or no longer matched what the option does
 
+***
+
 [1.1.27]
 
 **Added**
